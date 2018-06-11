@@ -69,7 +69,7 @@ Terms are *italicized* when referenced later on.
 
     1. Input:
 
-        1. Desired parameters 
+        1. Desired parameters
 
         2. Desired *Design* location - options:
 
@@ -128,3 +128,22 @@ Terms are *italicized* when referenced later on.
 * *NOTE*: Let’s say that the user makes changes to the general documentation within their local *Design Template*, and then we need to send out some changes via the remote repo. We’ll need to be able to preserve their changes, while at the same time merging them with ours. Having the user resolve merge conflicts is out of the question, but we could possibly make a local branch for the user to edit? That doesn’t solve the issue of having to resolve merge conflicts, though. We could also make separate repos for the *General Plant Docs* and the *General Plant YAML/F3D*.
 
     * How about this: if the user is fine with the design as is, have them input a URL when running *aide_gui*. If the user would like to make changes, have them download the *Design* repository and make changes there.
+
+## AIDE Pseudo-code MVP1
+```python
+import aide_design
+import aide_document
+import aide_draw
+import aide_render
+import aide_gui
+
+#design_repository_path = get_user_design_repository_path() #get input from the User
+user_params_yaml_path = aide_gui.run(design_repository_path)  
+# User opens top level design in Fusioin that is already downloaded
+design_yaml_path = aide_design.design(user_params_yaml_path)
+aide_draw.draw(open_fusion_document, design_yaml_path)
+aide_document.document(open_documentation, design_yaml_path)
+
+```
+default user params path: user_params_YYYY_MM_DD_HH_SS.yaml
+default design path: design_YYYY_MM_DD_HH_SS.yaml
