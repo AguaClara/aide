@@ -20,7 +20,7 @@ def abs_path(file_path):
 
 sys.path.append(abs_path('.'))
 
-from .palette_gui import palette_gui
+from .aide_gui import palette_gui
 
 # Global list to keep all event handlers in scope.
 # This is only needed with Python.
