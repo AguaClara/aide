@@ -27,29 +27,13 @@ from .palette_gui import palette_gui
 handlers = []
 
 def run(context):
+    import importlib
+    importlib.reload(palette_gui)
     ui = None
     try:
         app = adsk.core.Application.get()
         ui  = app.userInterface
-
-        # Get the CommandDefinitions collection.
-        cmdDefs = ui.commandDefinitions
-
-        # Create a button command definition.
-        buttonSample = cmdDefs.addButtonDefinition('MyButtonDefIdPython',
-                                                   'Python Sample Button',
-                                                   'Sample button tooltip')
-
-        # Connect to the command created event.
-        sampleCommandCreated = SampleCommandCreatedEventHandler()
-        buttonSample.commandCreated.add(sampleCommandCreated)
-        handlers.append(sampleCommandCreated)
-
-        # Get the ADD-INS panel in the model workspace.
-        addInsPanel = ui.allToolbarPanels.itemById('SolidScriptsAddinsPanel')
-
-        # Add the button to the bottom of the panel.
-        buttonControl = addInsPanel.controls.addCommand(buttonSample)
+        palette_gui.run(context)
     except:
         if ui:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
