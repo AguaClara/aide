@@ -30,6 +30,7 @@ def run(context):
     import importlib
     importlib.reload(palette_gui)
     ui = None
+    # TODO: See if any lines are missing from the default
     try:
         app = adsk.core.Application.get()
         ui  = app.userInterface
@@ -71,7 +72,7 @@ def stop(context):
     try:
         app = adsk.core.Application.get()
         ui  = app.userInterface
-
+        # TODO: stop aide_gui from running
         # Clean up the UI.
         cmdDef = ui.commandDefinitions.itemById('MyButtonDefIdPython')
         if cmdDef:
