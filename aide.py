@@ -1,5 +1,26 @@
-import adsk.core, adsk.fusion, adsk.cam, traceback
-from aide_gui import palette_gui
+import adsk.core, adsk.fusion, adsk.cam, traceback, sys, os, inspect
+
+def abs_path(file_path):
+    """
+    Takes a relative file path to the calling file and returns the correct
+    absolute path. Needed because the Fusion 360 environment doesn't resolve
+    relative paths well.
+
+    Parameters
+    ----------
+    file_path: str
+        Relative file path to the calling file
+
+    Return
+    -------
+        : string
+        The correct absolute path.
+    """
+    return os.path.join(os.path.dirname(inspect.getfile(sys._getframe(1))), file_path)
+
+sys.path.append(abs_path('.'))
+
+from .palette_gui import palette_gui
 
 # Global list to keep all event handlers in scope.
 # This is only needed with Python.
@@ -15,9 +36,9 @@ def run(context):
         cmdDefs = ui.commandDefinitions
 
         # Create a button command definition.
-        buttonSample = cmdDefs.addButtonDefinition('AIDECommandDefIdPython',
-                                                   'Run AIDE',
-                                                   'Creates a design')
+        buttonSample = cmdDefs.addButtonDefinition('MyButtonDefIdPython',
+                                                   'Python Sample Button',
+                                                   'Sample button tooltip')
 
         # Connect to the command created event.
         sampleCommandCreated = SampleCommandCreatedEventHandler()
@@ -58,7 +79,8 @@ class SampleCommandExecuteHandler(adsk.core.CommandEventHandler):
         # Code to react to the event.
         app = adsk.core.Application.get()
         ui  = app.userInterface
-        palette_gui.palette_gui.run(context)
+        ui.messageBox('In command execute event handler.')
+        palette_gui.run(context)
 
 
 def stop(context):
