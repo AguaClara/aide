@@ -2,8 +2,6 @@ import sys, os, inspect, importlib
 import adsk.core, adsk.fusion, adsk.cam, traceback # Fusion 360 imports
 from .aide_gui import palette_gui
 
-# TODO: Add manifest
-
 # Takes a relative file path (String) to the calling file and returns the correct absolute path (String). Needed because the Fusion 360 environment doesn't resolve relative paths well.
 def abs_path(file_path):
     return os.path.join(os.path.dirname(inspect.getfile(sys._getframe(1))), file_path)
