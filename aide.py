@@ -1,36 +1,22 @@
-import adsk.core, adsk.fusion, adsk.cam, traceback, sys, os, inspect
-
-def abs_path(file_path):
-    """
-    Takes a relative file path to the calling file and returns the correct
-    absolute path. Needed because the Fusion 360 environment doesn't resolve
-    relative paths well.
-
-    Parameters
-    ----------
-    file_path: str
-        Relative file path to the calling file
-
-    Return
-    -------
-        : string
-        The correct absolute path.
-    """
-    return os.path.join(os.path.dirname(inspect.getfile(sys._getframe(1))), file_path)
-
-sys.path.append(abs_path('.'))
-
+import sys, os, inspect, importlib
+import adsk.core, adsk.fusion, adsk.cam, traceback # Fusion 360 imports
 from .aide_gui import palette_gui
 
+# TODO: Add manifest
+
+# Takes a relative file path (String) to the calling file and returns the correct absolute path (String). Needed because the Fusion 360 environment doesn't resolve relative paths well.
+def abs_path(file_path):
+    return os.path.join(os.path.dirname(inspect.getfile(sys._getframe(1))), file_path)
+
+# NOTE: This is probably not needed, but add it back if imports are broken and put aide packages after it.
+#sys.path.append(abs_path('.'))
+
 # Global list to keep all event handlers in scope.
-# This is only needed with Python.
 handlers = []
 
 def run(context):
-    import importlib
     importlib.reload(palette_gui)
     ui = None
-    # TODO: See if any lines are missing from the default
     try:
         app = adsk.core.Application.get()
         ui  = app.userInterface
@@ -39,49 +25,11 @@ def run(context):
         if ui:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
-
-# Event handler for the commandCreated event.
-class SampleCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
-    def __init__(self):
-        super().__init__()
-    def notify(self, args):
-        eventArgs = adsk.core.CommandCreatedEventArgs.cast(args)
-        cmd = eventArgs.command
-
-        # Connect to the execute event.
-        onExecute = SampleCommandExecuteHandler()
-        cmd.execute.add(onExecute)
-        handlers.append(onExecute)
-
-
-# Event handler for the execute event.
-class SampleCommandExecuteHandler(adsk.core.CommandEventHandler):
-    def __init__(self):
-        super().__init__()
-    def notify(self, args):
-        eventArgs = adsk.core.CommandEventArgs.cast(args)
-
-        # Code to react to the event.
-        app = adsk.core.Application.get()
-        ui  = app.userInterface
-        ui.messageBox('In command execute event handler.')
-        palette_gui.run(context)
-
-
 def stop(context):
     try:
         app = adsk.core.Application.get()
         ui  = app.userInterface
-        # TODO: stop aide_gui from running
-        # Clean up the UI.
-        cmdDef = ui.commandDefinitions.itemById('MyButtonDefIdPython')
-        if cmdDef:
-            cmdDef.deleteMe()
-
-        addinsPanel = ui.allToolbarPanels.itemById('SolidScriptsAddinsPanel')
-        cntrl = addinsPanel.controls.itemById('MyButtonDefIdPython')
-        if cntrl:
-            cntrl.deleteMe()
+        palette_gui.stop(context)
     except:
         if ui:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
