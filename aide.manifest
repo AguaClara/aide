@@ -1,0 +1,12 @@
+{
+	"autodeskProduct":	"Fusion360",
+	"type":	"addin",
+	"id":	"",
+	"author":	"AguaClara Cornell",
+	"description":	{
+		"":	"The AguaClara Infrastructure Design Engine (AIDE) is a tool for creating full designs (including 3D models and construction documentation) for infrastructure."
+	},
+	"version":	"V1",
+	"runOnStartup":	false,
+	"supportedOS":	"windows|mac"
+}
