@@ -4,7 +4,7 @@
 	"id":	"",
 	"author":	"AguaClara Cornell",
 	"description":	{
-		"":	"The AguaClara Infrastructure Design Engine (AIDE) is a tool for creating full designs (including 3D models and construction documentation) for infrastructure."
+		"":	"AguaClara Infrastructure Design Engine"
 	},
 	"version":	"V1",
 	"runOnStartup":	false,
