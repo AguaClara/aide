@@ -1,6 +1,6 @@
 import sys, os, inspect, importlib
 import adsk.core, adsk.fusion, adsk.cam, traceback # Fusion 360 imports
-from .aide_gui import palette_gui
+from .aide_gui import aide_gui
 
 # Takes a relative file path (String) to the calling file and returns the correct absolute path (String). Needed because the Fusion 360 environment doesn't resolve relative paths well.
 def abs_path(file_path):
@@ -13,12 +13,12 @@ def abs_path(file_path):
 handlers = []
 
 def run(context):
-    importlib.reload(palette_gui)
+    importlib.reload(aide_gui)
     ui = None
     try:
         app = adsk.core.Application.get()
         ui  = app.userInterface
-        palette_gui.run(context)
+        aide_gui.run(context)
     except:
         if ui:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
@@ -27,7 +27,7 @@ def stop(context):
     try:
         app = adsk.core.Application.get()
         ui  = app.userInterface
-        palette_gui.stop(context)
+        aide_gui.stop(context)
     except:
         if ui:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
