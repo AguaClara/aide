@@ -1,33 +1,67 @@
-essentially# AIDE - Summer Research Report #1
+# AIDE - Summer Research Report #1
 This is a report on our progress so far on integrating the AIDE tool and its components.
 
 ## AIDE
-What AIDE tool is supposed to do (input and output)
+What AIDE tool is supposed to do (input and output) ( WILL BE eDIteD and fixed according to conversation with Ethan)
 After much discussion with Fletcher and Ethan, we came to a conclusion of having our AIDE tool be an outside controller, separate from the individual parts of AIDE. This AIDE tool will essentially be in charge of running the whole AIDE program and running the background modules, calling each separate parts of the design tool, including GUI, Design, Draw, and Document.
 
 
-Add the chart (updated pls)
+Add the chart (updated pls)(will be added after conversation with Ethan)
 
+Briefly describe what each Subteam does?
+Template: Creates 3D models of water treatment plants in Fusion 360
+GUI: (Graphical User Interface) Gets input values from the user and displays the interface on Fusion 360, and compresses the collected inputs into a YAML form that is easily used by design functions
+Design: Writes python functions which will be used by Jinja to calculate the design parameters needed in Fusion to scale the model of an AguaClara plant
+Draw: Uses Python to update the Fusion templates created by AIDE template with the appropriate values which were passed in by AIDE Design
+Document: Take in parameters from both the parameterized Fusion model and the Design team's calculation and automatically populate a template document with the correct dimensions and variables
 
-briefly describe what each subteam does?
-Template:
-GUI: Gets input values from the user and displays the interface on Fusion 360, and compress the collected inputs into a YAML form that is easily used by design functions
-Design: Takes YAML from GUI and calculates
-Draw:
-Document:
+In this guide, quoted lines describe how the code works in the background.
+> Skip over them if you only want to read a high-level explanation of the modules.
 
 ## AIDE GUI
+When AIDE is run, it also initializes and runs another Fusion 360 add-in, AIDE GUI (Graphical User Interface). This GUI allows the user to input values (such as desired flow rate) that affect the dimensions of the finished water treatment plant.
 
-When AIDE is run, it also initializes and runs a Fusion 360 add-in in the form of AIDE GUI (Graphical User Interface). This GUI allows the user to input values (such as desired flow rate) that affect the dimensions of the finished water treatment plant.
+### How AIDE GUI works
+In order to use a custom-made Fusion 360 add-in, you must move the folder containing all of your necessary files to a specified location on your hard drive.
+> For each operating system, this location is:
+
+>Windows – C:\Users\%username%\AppData\Autodesk\Autodesk Fusion 360\API\AddIns
+
+>Mac – $HOME/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns
+
+> For development, we make a symbolic link (like a web link, but between files and folders) from the Git repository to this specified location. The folders are usually hidden, so you must unhide them in order to access them.
+
+You then open Fusion 360 > Scripts & Add-Ins > Add-Ins > aide_gui > Run. The palette window then opens on the right.
+
+> Fusion uses `aide_gui.py` to begin running the palette. At the top are imports for all of the packages that are used and global variables that are referenced when the add-in is run.
+
+> The `run(context)` function is then run. After loading global variables and helper functions, the `showPalette` command is defined. This command will be responsible for showing the palette. Normally, this would display a button under one of Fusion's dropdown menus, but we've omitted that functionality. Instead of manually showing the palette with a button, it opens and closes when the add-in is run or stopped.
+
+> The `showPalette` command is then connected to an instance of the `ShowPaletteCommandCreatedHandler` class. Instances of this class, and of all other handler classes within `aide_gui.py`, become "event handlers", similar to event listeners in Java. They "listen" for events being triggered by Fusion 360 - when that happens, they run the `notify(self, args)` function from their respective class.
+
+> This handler is then added to the global `handlers` list so that Fusion can begin listening for the event, and then it is immediately triggered by `showPaletteCmdDef.execute()`.
+
+> The
+
+You can then click on the blue buttons and the dropdown menu to navigate throughout the GUI.
+
+If you go to Designs > Load Design, you're then brought to the user inputs page, where you can give values to the
 
 ### Progress
 #### File reorganization
 We started out by restructuring the files in the top-most directory to contain our:
 1. Code to run the Fusion 360 add-in (`aide_gui.py` and `helper.py`)
 2. A `data` folder containing the files necessary for displaying the GUI
-3. A `dependencies` folders containing the Python packages for displaying the GUI and processing user inputs
+3. A `dependencies` folders containing the Python packages for displaying the GUI and processing user inputs:
 
-Within `data`, we placed our HTML templates, YAML's, and images which are used to display the GUI.
+    a. fsaf
+
+Within `data`, we placed `display.html`, which shows the current page in the GUI when it's being used. We also unified all of our YAML's that combine with the HTML templates for rendering specific pages into `structure.yaml`.
+
+> We moved the JavaScript for transferring data between HTML and Python into `base.html`, since every page extends that file.
+
+#### Added functionality
+We now have the ability to output a YAML (`params.yaml` in the top level directory) containing the user's inputs for a given design. To do this, we added another function in `base.html`'s JavaScript that collects inputs within a HTML `<form>` object in `template.html`. This is the YAML that will be passed on to the design team to do the calculations.
 
 ## AIDE TEMPLATE
 
@@ -37,16 +71,54 @@ For better understanding template, let's think of template as a burger. Usually 
 
  Now if you wanted to order a double-double, you would input number of patties to equal 2. Fusion 360 will take this input and update the parameters for cheese, lettuce and tomato.
 
-Number of patties = 2
+<font style="color:brown"> Number of patties = 2 </font>
+<br>
+<font style="color:orange"> Number of buns = 2 </font>
+<br>
+<font style="color:yellow"> Number of cheese slices = </font> <font style="color:brown"> Number of patties </font>
+<br>
+<font style="color:lightgreen"> Number of lettuce slices = </font> <font style="color:brown">Number of patties </font>
+<br>
+<font style="color:pink"> Number of tomato slices = </font> <font style="color:brown"> Number of patties </font>
 
-Number of buns = 2
-
-Number of cheese slices = Number of patties
-
-Number of lettuce slices = Number of patties
-
-Number of tomato slices = Number of patties
-
-
-
+<br>
 The goal for the summer is to finish the 3D models of all the components and test the assemblies to make sure all the components are linked properly. As parameter value changes, the geometry of assemblies should change accordingly without interfering with other assemblies. Furthermore, we are trying to find the best naming convention for Template to use in order to have consistent parameter names throughout AIDE and prevent misunderstanding between subteams.
+
+### Naming Convention
+
+The current naming convention is not consistent throughout Template or AIDE. In order to standardize the parameter names, we referenced the water treatment plant flowchart.
+
+![](waterplantflowchart.png)
+
+The naming convention will in the form of:
+
+<font style="color:pink"> (assembly) </font>
+<font style="color:lightgreen">\_(component) </font>
+<font style="color:khaki">\_(parameter) </font>
+
+
+<br>
+An example would be:
+
+<font style="color:pink">Flocculator </font>
+<font style="color:lightgreen">\_ConcreteChannels </font>
+<font style="color:khaki">\_LengthWidth </font>
+
+<br>
+If the assembly does not have a component, then it will be in the form of:
+
+<font style="color:pink"> (assembly) </font>
+<font style="color:khaki">\_(parameter) </font>
+
+<br>
+An example would be:
+
+<font style="color:pink"> EntranceTank </font> <font style="color:khaki"> \_Height <font>
+
+During summer, we hope to convert all the Template and Design parameters to this naming convention. :D
+
+
+
+
+
+Thanks for reading! :D
