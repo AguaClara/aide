@@ -31,11 +31,11 @@ Within `data`, we placed our HTML templates, YAML's, and images which are used t
 
 ## AIDE TEMPLATE
 
-Template utilizes Fusion 360, a CAD software, to create 3D models of the water treatment plant. Fusion is the ideal software for template because it allows components to be parameterized with equations and numbers. Parameters are "user-defined values used to control any reference geometry."
+Template utilizes Fusion 360, a CAD software, to create 3D models of the water treatment plant. Fusion is the ideal software for Template because it allows components to be parameterized with equations and numbers. Parameters are "user-defined values used to control any reference geometry."
 
-For better understanding template, let's think of template as a burger. Usually when you order a burger, you get a patty, slice of cheese, lettuce, and tomato. The number of each part of the burger can be parametrized as seen below.
+To better understand what Template does, let's think of Template as a burger. Usually when you order a burger, you get a patty, slice of cheese, lettuce, and tomato. The number of each part of the burger can be parametrized as seen below.
 
- Now if you wanted to order a double-double, you would input number of patties to equal 2. Fusion 360 will take this input and update the parameters for cheese, lettuce and tomato.
+ Now if you wanted to order a double-double, you would input number of patties to equal 2. Fusion 360 will take this input and update the parameters for cheese, lettuce and tomato, accordingly.
 
 Number of patties = 2
 
@@ -47,6 +47,4 @@ Number of lettuce slices = Number of patties
 
 Number of tomato slices = Number of patties
 
-
-
-The goal for the summer is to finish the 3D models of all the components and test the assemblies to make sure all the components are linked properly. As parameter value changes, the geometry of assemblies should change accordingly without interfering with other assemblies. Furthermore, we are trying to find the best naming convention for Template to use in order to have consistent parameter names throughout AIDE and prevent misunderstanding between subteams.
+The goal for the summer is to finish the 3D models of all the components and test the assemblies to make sure all the components are linked properly. As parameter values change, the geometry of assemblies should change accordingly without interfering with other assemblies. Furthermore, we are trying to determine the best naming convention for Template to use in order to have consistent parameter names throughout AIDE and prevent misunderstanding between subteams. This will also help with future Template teams keep a consistent parameter naming convention as well as know what each parameter means.
