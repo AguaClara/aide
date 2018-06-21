@@ -41,7 +41,7 @@ You then open Fusion 360 > Scripts & Add-Ins > Add-Ins > aide_gui > Run. The pal
 
 > This handler is then added to the global `handlers` list so that Fusion can begin listening for the event, and then it is immediately triggered by `showPaletteCmdDef.execute()`.
 
-> The
+>
 
 You can then click on the blue buttons and the dropdown menu to navigate throughout the GUI.
 
@@ -50,11 +50,11 @@ If you go to Designs > Load Design, you're then brought to the user inputs page,
 ### Progress
 #### File reorganization
 We started out by restructuring the files in the top-most directory to contain our:
-1. Code to run the Fusion 360 add-in (`aide_gui.py` and `helper.py`)
-2. A `data` folder containing the files necessary for displaying the GUI
+1. Code to run the Fusion 360 add-in (`aide_gui.py` and `helper.py`).
+2. A `data` folder containing the files necessary for displaying the GUI:
+  1.
 3. A `dependencies` folders containing the Python packages for displaying the GUI and processing user inputs:
-
-    a. fsaf
+  - `jinja2`, `markupsafe`, `urllib3`, `yaml`
 
 Within `data`, we placed `display.html`, which shows the current page in the GUI when it's being used. We also unified all of our YAML's that combine with the HTML templates for rendering specific pages into `structure.yaml`.
 
