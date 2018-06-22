@@ -55,7 +55,7 @@ We started out by restructuring the files in the top-most directory to contain t
     1. `display.html` shows the current page in the GUI when it's being used.
     2. `structure.yaml` gives a "sitemap" of all the pages in the GUI and what data they show.
     3. `templates/` contains the default HTML templates which are combined with the data in `structure.yaml` to display specific pages.
-        - `base.html` contains Javascript script that sends button presses in `display.html` to `aide_gui.py`. 
+        - `base.html` contains Javascript script that sends button presses in `display.html` to `aide_gui.py`.
     4. `images/` contains pictures that are displayed in the palette.
 3. A `dependencies` folders containing the Python packages for displaying the GUI and processing user inputs:
     - `jinja2`, `markupsafe`, `urllib3`, `yaml`
@@ -114,8 +114,9 @@ If the assembly does not have a component, then it will be in the form of:
 <br>
 An example would be:
 
-<font style="color:pink"> EntranceTank </font> <font style="color:khaki"> \_Height <font>
+<font style="color:pink"> EntranceTank </font> <font style="color:khaki"> \_Height </font>
 
+<br>
 This naming convention is still in discussion. Since there are lots of subcomponents, we are not completely certain that this method of naming parameters will be sustainable for future Template and Design subteams.  
 
 
