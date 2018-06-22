@@ -15,7 +15,7 @@ Design: Writes python functions which will be used by Jinja to calculate the des
 Draw: Uses Python to update the Fusion templates created by AIDE template with the appropriate values which were passed in by AIDE Design
 Document: Take in parameters from both the parameterized Fusion model and the Design team's calculation and automatically populate a template document with the correct dimensions and variables
 
-In this guide, quoted lines describe how the code works in the background.
+In this report, quoted lines give a more detailed description of how the components work in the background.
 > Skip over them if you only want to read a high-level explanation of the modules.
 
 ## AIDE GUI
@@ -49,19 +49,20 @@ If you go to Designs > Load Design, you're then brought to the user inputs page,
 
 ### Progress
 #### File reorganization
-We started out by restructuring the files in the top-most directory to contain our:
-1. Code to run the Fusion 360 add-in (`aide_gui.py` and `helper.py`).
-2. A `data` folder containing the files necessary for displaying the GUI:
-  1.
+We started out by restructuring the files in the top-most directory to contain the following:
+1. `aide_gui.py` and `helper.py`, code to run the Fusion 360 add-in.
+2. `data/` containing the files necessary for displaying the GUI:
+    1. `display.html` shows the current page in the GUI when it's being used.
+    2. `structure.yaml` gives a "sitemap" of all the pages in the GUI and what data they show.
+    3. `templates/` contains the default HTML templates which are combined with the data in `structure.yaml` to display specific pages.
+        - `base.html` contains Javascript script that sends button presses in `display.html` to `aide_gui.py`. 
+    4. `images/` contains pictures that are displayed in the palette.
 3. A `dependencies` folders containing the Python packages for displaying the GUI and processing user inputs:
-  - `jinja2`, `markupsafe`, `urllib3`, `yaml`
-
-Within `data`, we placed `display.html`, which shows the current page in the GUI when it's being used. We also unified all of our YAML's that combine with the HTML templates for rendering specific pages into `structure.yaml`.
-
-> We moved the JavaScript for transferring data between HTML and Python into `base.html`, since every page extends that file.
+    - `jinja2`, `markupsafe`, `urllib3`, `yaml`
 
 #### Added functionality
-We now have the ability to output a YAML (`params.yaml` in the top level directory) containing the user's inputs for a given design. To do this, we added another function in `base.html`'s JavaScript that collects inputs within a HTML `<form>` object in `template.html`. This is the YAML that will be passed on to the design team to do the calculations.
+We now have the ability to output a YAML (`params.yaml` in the top level directory) containing the user's inputs for a given design.
+> To do this, we added another function in `base.html`'s JavaScript that collects inputs within a HTML `<form>` object in `template.html`. This is the YAML that will be passed on to the design team to do the calculations.
 
 ## AIDE TEMPLATE
 
