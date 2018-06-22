@@ -71,15 +71,15 @@ For better understanding template, let's think of template as a burger. Usually 
 
  Now if you wanted to order a double-double, you would input number of patties to equal 2. Fusion 360 will take this input and update the parameters for cheese, lettuce and tomato.
 
-<font style="color:brown"> Number of patties = 2 </font>
+<font style="color:lightblue"> Number of patties = 2 </font>
 <br>
 <font style="color:orange"> Number of buns = 2 </font>
 <br>
-<font style="color:yellow"> Number of cheese slices = </font> <font style="color:brown"> Number of patties </font>
+<font style="color:yellow"> Number of cheese slices = </font> <font style="color:lightblue"> Number of patties </font>
 <br>
-<font style="color:lightgreen"> Number of lettuce slices = </font> <font style="color:brown">Number of patties </font>
+<font style="color:lightgreen"> Number of lettuce slices = </font> <font style="color:lightblue">Number of patties </font>
 <br>
-<font style="color:pink"> Number of tomato slices = </font> <font style="color:brown"> Number of patties </font>
+<font style="color:pink"> Number of tomato slices = </font> <font style="color:lightblue"> Number of patties </font>
 
 <br>
 The goal for the summer is to finish the 3D models of all the components and test the assemblies to make sure all the components are linked properly. As parameter value changes, the geometry of assemblies should change accordingly without interfering with other assemblies. Furthermore, we are trying to find the best naming convention for Template to use in order to have consistent parameter names throughout AIDE and prevent misunderstanding between subteams.
@@ -115,8 +115,7 @@ An example would be:
 
 <font style="color:pink"> EntranceTank </font> <font style="color:khaki"> \_Height <font>
 
-During summer, we hope to convert all the Template and Design parameters to this naming convention. :D
-
+This naming convention is still in discussion. Since there are lots of subcomponents, we are not completely certain that this method of naming parameters will be sustainable for future Template and Design subteams.  
 
 
 
