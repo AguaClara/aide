@@ -1,5 +1,6 @@
 # AguaClara Packages
 aide_gui
+aide_draw
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
