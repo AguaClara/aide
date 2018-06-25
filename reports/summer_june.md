@@ -46,7 +46,7 @@ You then open Fusion 360 > Scripts & Add-Ins > Add-Ins > aide_gui > Run. The pal
 You can then click on the blue buttons and the dropdown menu to navigate throughout the GUI.
 
 If you go to Designs > Load Design, you're then brought to the user inputs page, where you can give parameters that are necessary for generating the design that you selected.
-> In `template.html`, there is a `<form>` element with a set `id` that contains all of the `<input>` elements defined in 
+> In `template.html`, there is a `<form>` element with a set `id` that contains all of the `<input>` elements defined in
 
 ### Progress
 #### File reorganization
@@ -92,6 +92,21 @@ The current naming convention is not consistent throughout Template or AIDE. In 
 
 ![](waterplantflowchart.png)
 
+---------------------------------------------------------------------------------
+POTENTIAL NAMING CONVENTION #1
+
+Currently, the naming convention for parameter names is in the form of:
+
+(sub-assembly)\_(components)\_(parameters)
+
+However, this was not consistently used during the previous semester, and different assemblies or components have inaccurate parameters. The new naming convention we are proposing is that the parameters do not describe which assembly or component they are part of.
+
+Instead of <font style="color:pink">Flocculator </font> <font style="color:lightgreen">\_ConcreteChannels </font> <font style="color:khaki">\_Length </font>, the parameter will be just called <font style="color:khaki">Length</font>.
+
+
+---------------------------------------------------------------------------------
+POTENTIAL NAMING CONVENTION #2
+
 The naming convention will in the form of:
 
 <font style="color:pink"> (assembly) </font>
@@ -114,7 +129,8 @@ If the assembly does not have a component, then it will be in the form of:
 <br>
 An example would be:
 
-<font style="color:pink"> EntranceTank </font> <font style="color:khaki"> \_Height </font>
+<font style="color:pink"> EntranceTank </font>
+<font style="color:khaki"> \_Height </font>
 
 <br>
 This naming convention is still in discussion. Since there are lots of subcomponents, we are not completely certain that this method of naming parameters will be sustainable for future Template and Design subteams.  
