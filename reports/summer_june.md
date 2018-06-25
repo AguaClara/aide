@@ -41,12 +41,12 @@ You then open Fusion 360 > Scripts & Add-Ins > Add-Ins > aide_gui > Run. The pal
 
 > This handler is then added to the global `handlers` list so that Fusion can begin listening for the event, and then it is immediately triggered by `showPaletteCmdDef.execute()`.
 
->
+>In base.html, the
 
 You can then click on the blue buttons and the dropdown menu to navigate throughout the GUI.
 
 If you go to Designs > Load Design, you're then brought to the user inputs page, where you can give parameters that are necessary for generating the design that you selected.
-> In `template.html`, there are
+> In `template.html`, there is a `<form>` element with a set `id` that contains all of the `<input>` elements defined in 
 
 ### Progress
 #### File reorganization
@@ -97,7 +97,6 @@ The naming convention will in the form of:
 <font style="color:pink"> (assembly) </font>
 <font style="color:lightgreen">\_(component) </font>
 <font style="color:khaki">\_(parameter) </font>
-
 
 <br>
 An example would be:
