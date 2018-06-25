@@ -45,24 +45,25 @@ You then open Fusion 360 > Scripts & Add-Ins > Add-Ins > aide_gui > Run. The pal
 
 You can then click on the blue buttons and the dropdown menu to navigate throughout the GUI.
 
-If you go to Designs > Load Design, you're then brought to the user inputs page, where you can give values to the
+If you go to Designs > Load Design, you're then brought to the user inputs page, where you can give parameters that are necessary for generating the design that you selected.
+> In `template.html`, there are
 
 ### Progress
 #### File reorganization
 We started out by restructuring the files in the top-most directory to contain the following:
-1. `aide_gui.py` and `helper.py`, code to run the Fusion 360 add-in.
-2. `data/` containing the files necessary for displaying the GUI:
+1. `aide_gui.py` and `helper.py` have the code to run the Fusion 360 add-in.
+2. `data/` contains the files necessary for displaying the GUI:
     1. `display.html` shows the current page in the GUI when it's being used.
     2. `structure.yaml` gives a "sitemap" of all the pages in the GUI and what data they show.
     3. `templates/` contains the default HTML templates which are combined with the data in `structure.yaml` to display specific pages.
         - `base.html` contains Javascript script that sends button presses in `display.html` to `aide_gui.py`.
     4. `images/` contains pictures that are displayed in the palette.
-3. A `dependencies` folders containing the Python packages for displaying the GUI and processing user inputs:
+3. `dependencies/` contains the Python packages for displaying the GUI and processing user inputs:
     - `jinja2`, `markupsafe`, `urllib3`, `yaml`
 
 #### Added functionality
-We now have the ability to output a YAML (`params.yaml` in the top level directory) containing the user's inputs for a given design.
-> To do this, we added another function in `base.html`'s JavaScript that collects inputs within a HTML `<form>` object in `template.html`. This is the YAML that will be passed on to the design team to do the calculations.
+We now have the ability to output a YAML (`params.yaml` in the top level directory) containing the user's inputs for a given design. This is the YAML that will be passed on to the design team to do the calculations.
+> To do this, we added the `formToDict` function in `base.html`'s JavaScript that collects inputs within a HTML `<form>` object in `template.html`.
 
 ## AIDE TEMPLATE
 
@@ -119,7 +120,5 @@ An example would be:
 <br>
 This naming convention is still in discussion. Since there are lots of subcomponents, we are not completely certain that this method of naming parameters will be sustainable for future Template and Design subteams.  
 
-
-
-
+<br>
 Thanks for reading! :D
