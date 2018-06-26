@@ -39,7 +39,7 @@ def run_design():
     ui  = app.userInterface
     input_params = helper.load_yaml(abs_path("aide_gui/params.yaml"))
     lfom_params = helper.load_yaml(abs_path("lfom.yaml"))
-    lfom_params['LFOM_1']['dp']['spacing'] = str(int(input_params['Flow Rate (L/s)']) * 2)
+    lfom_params['LFOM_1']['dp']['spacing'] = str(int(input_params['q']) * 2)
     lfom_path = abs_path('lfom.yaml')
     helper.write_yaml(lfom_path, lfom_params)
     rootComponent = adsk.fusion.FusionDocument.cast(app.activeProduct.parentDocument).design.rootComponent
