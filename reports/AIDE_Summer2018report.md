@@ -124,12 +124,28 @@ In order to AIDE GUI, you must first have AIDE installed and set up, with the AI
 
 > This handler is then added to the global `handlers` list so that Fusion can begin listening for the event, and then it is immediately triggered by `showPaletteCmdDef.execute()`.
 
-> In base.html, the 
+> In the `ShowPaletteCommandCreatedHandler` class, `notify` is run, which appends a `ShowPaletteCommandExecuteHandler` instance to `handlers` and runs `notify`. The `CreatedHandler` and `ExecuteHandler` work similarly in this regard, but note the difference in the names.
+
+> The `ExecuteHandler` `notify` function is then run. It sets a `command` describing which HTML template and page information to use. This page info is stored in `structure.yaml`, which gives a "sitemap" of the entire GUI. This command is then sent into the `helper.display` function in `helper.py`, which uses Jinja2 to render the page.
+
+> Jinja2 looks through the template HTML (`home.html` in this case) and looks for {% logic statements %} or {{ variable names }}, signified by those symbols. It then runs the logic statements to create all of the necessary HTML elements and fills the variable names using the page information stored in `structure.yaml`. The completed HTML is stored in `display.html`.
+
+> The palette is then rendered in Fusion 360 using `display.html` and a `MyHTMLEventHandler` instance is appended to `handlers` to begin listening for clicks.
 
 You can then click on the blue buttons and the dropdown menu to navigate throughout the GUI.
 
+> Every HTML template extends `base.html`, which contains:
+> 1. Access calls to Bootstrap scripts that make them look nice
+> 2. Render instructions for our dropdown menu
+> 3. A `<script>` element containing all of our Javascript functions.
+
+> Every `<button>` element in the HTML templates maps to the `sendInfoToFusion` Javascript function defined in `base.html`. This function gathers the same data from `structure.yaml` for the next page to be loaded and passes it to `aide_gui.py` to be used. This data is stored hierarchically, meaning that each subsequent page is one level "deeper".
+
+> This passed data is collected in `MyHTMLEventHandler.notify`, where it renders the next page and refreshes `display.html` the same way as in `ExecuteHandler.notify`.
+
 If you go to Designs > Load Design, you're then brought to the user inputs page, where you can give parameters that are necessary for generating the design that you selected.
-> In `template.html`, there is a `<form>` element with a set `id` that contains all of the `<input>` elements defined in
+
+> In `template.html`, there is a `<form>` element with a set `id` that contains all of the `<input>` elements defined in `structure.yaml` under the `params` keys. After user values are entered and "Collect" is clicked, a slightly different `sendInfoToFusion` call is made where these `<input>` elements' values are collected with `formToDict()`. These collected values are then sent to `MyHTMLEventHandler.notify` and written to `params.yaml`.
 
 ### Progress
 #### File reorganization
