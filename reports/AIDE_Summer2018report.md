@@ -2,18 +2,28 @@
 This is a report on our progress so far on integrating the AIDE tool and its components.
 
 ## AIDE
-What AIDE tool is supposed to do (input and output) ( WILL BE eDIteD and fixed according to conversation with Ethan)
-After much discussion with Fletcher and Ethan, we came to a conclusion of having our AIDE tool be an outside controller, separate from the individual parts of AIDE. This AIDE tool will essentially be in charge of running the whole AIDE program and running the background modules, calling each separate parts of the design tool, including GUI, Design, Draw, and Document.
+AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temperature and produces the hydraulic design and building documentation for a water treatment plant. It utilizes/runs all five of its modules sequentially, while maintaining separation such that each module can be used to some degree on its own.
 
+### How AIDE works
+1. **Template**: Contains scalable 3D models of water treatment plants and their respective building documentation, maintained by the aide_template team.
+2. **GUI** (Graphical User Interface): Displays a user interface in Fusion 360, collects the required input values from the user, and compiles them into a YAML file.
+3. **Design**: Runs calculations to form all of the physical parameters of a water treatment plant, based off of the inputs collected by the GUI.
+4. **Draw**: Updates and scales 3D models of water treatment plants, based off of the calculated physical parameters from Design.
+5. **Document**: Updates and scales building documentation of water treatment plants, based off of the calculated physical parameters from Design.
 
-Add the chart (updated pls)(will be added after conversation with Ethan)
+Here is a chart detailing the flow of information throughout each module:
+![](info_flow_modules.jpg)
 
-Briefly describe what each Subteam does?
-Template: Creates 3D models of water treatment plants in Fusion 360
-GUI: (Graphical User Interface) Gets input values from the user and displays the interface on Fusion 360, and compresses the collected inputs into a YAML form that is easily used by design functions
-Design: Writes python functions which will be used by Jinja to calculate the design parameters needed in Fusion to scale the model of an AguaClara plant
-Draw: Uses Python to update the Fusion templates created by AIDE template with the appropriate values which were passed in by AIDE Design
-Document: Take in parameters from both the parameterized Fusion model and the Design team's calculation and automatically populate a template document with the correct dimensions and variables
+Here is a chart detailing the flow of information relative to each file:
+![](info_flow_files.jpg)
+
+For an explanation of some of the terms that are used above, see our [ReadMe](https://github.com/AguaClara/aide/blob/master/README.md).
+
+### Progress
+#### Module organization
+After much discussion, we came to a conclusion of having our AIDE module be the overall controller, separate from the individual submodules of AIDE. This AIDE module will essentially be in charge of running the whole AIDE program and running GUI, Design, Draw, and Document sequentially.
+
+---
 
 In this report, quoted lines give a more detailed description of how the components work in the background.
 > Skip over them if you only want to read a high-level explanation of the modules.
