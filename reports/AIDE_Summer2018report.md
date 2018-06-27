@@ -40,7 +40,7 @@ After the user enters their inputs, AIDE Design/Draw/Document are run sequential
 #### Module organization
 After much discussion, we came to a conclusion of having our AIDE module be the overall controller, separate from the individual submodules of AIDE. This AIDE module will essentially be in charge of running the whole AIDE program and running GUI, Design, Draw, and Document sequentially.
 
-> We did so using a technique known as the [observer pattern](https://en.wikipedia.org/wiki/Observer_pattern), where, instead of passing objects like integers and strings as function parameters, we're able to pass entire functions themselves as parameters. Then, this "`onSuccess`" function is called whenever it is needed.
+> We did so using a technique known as the [observer pattern](https://en.wikipedia.org/wiki/Observer_pattern), where, instead of passing objects like integers and strings as function parameters, we're able to pass an entire function as a parameter. Then, this "`onSuccess`" function is called whenever it is needed.
 
 ## AIDE TEMPLATE
 
@@ -64,12 +64,9 @@ Now if you wanted to order a double-double, you would input number of patties to
 
 The goal for the summer is to finish the 3D models of all the components and test the assemblies to make sure all the components are linked properly. As parameter values change, the geometry of assemblies should change accordingly without interfering with other assemblies. Furthermore, we are trying to find the best naming convention for Template to use in order to have consistent parameter names throughout AIDE and prevent misunderstanding between subteams.
 
-
-### AIDE Template Organization on Fusion 360
+### AIDE Template Organization of components in Fusion 360
 
 ![](waterplantflowchart.png)
-
-
 
 ### Naming Conventions
 
@@ -111,7 +108,7 @@ width = x axis?
 When AIDE is run, it also initializes and runs another Fusion 360 add-in, AIDE GUI (Graphical User Interface). This GUI allows the user to input values (such as desired flow rate) that affect the dimensions of the finished water treatment plant.
 
 ### How AIDE GUI works
-In order to AIDE GUI, you must first have AIDE installed and set up, with the AIDE GUI folder within the AIDE folder. You then open Fusion 360 > Scripts & Add-Ins > Add-Ins > aide > Run. The palette window then opens on the right.
+In order to use AIDE GUI, you must first have AIDE installed and set up, with the AIDE GUI folder within the AIDE folder. You then open Fusion 360 > Scripts & Add-Ins > Add-Ins > aide > Run. The palette window then opens on the right.
 
 > Fusion uses `aide_gui.py` to begin running the palette. At the top are imports for all of the packages that are used and global variables that are referenced when the add-in is run.
 
@@ -165,9 +162,14 @@ We now have the ability to output a YAML (`params.yaml` in the top level directo
 Design runs hydraulic calculations based off of inputs from GUI, creating exact physical dimensions for each component.
 
 ### How AIDE Design works
-Within the `aide_design` package, we have In this code, we are using the lfom.py for all of the calculations. Since our end goal is to create a lfom model, with this file, we use the YAML from aide_gui and complete the calculations necessary to be passed on to aide_draw.
+Within the `aide_design` package, there are three main folders of code:
+1. `designs\`: Contains Python *classes* for each component. When a component's class is initialized, it contains all of that component's physical dimensions as parameters.
+2. `functions\`: Contains Python *functions* for each component. Note that these functions are used independently for calculating individual physical parameters - they are *not* supposed to be used as instantiated objects.
+3. `shared\`: Contains various *functions* for general physical calculations, used across `aide_design`
 
-Right now, we are working as if `aide_design` was completed and running. In the run function in aide, we have written in a function that is replacing the design functions for now. In `lfom.yaml`, for the time being, we are only calculating one small thing, the spacing. After the YAML is changed with the new calculation, this YAML is then passed to AIDE Draw.
+In the current iteration of AIDE, we are first testing the creation of a LFOM design through all modules. Although currently incomplete and not up to date, we would use the `lfom.py` within `designs/` to instantiate an LFOM object describing all of the necessary dimensions.
+
+> Right now, we are working as if `aide_design` was completed and running. In the run function in aide, we have written in a function that is replacing the design functions for now. In `lfom.yaml`, for the time being, we are only calculating one small thing, the spacing. After the YAML is changed with the new calculation, this YAML is then passed to AIDE Draw.
 
 ## AIDE Draw
 After the YAML is passed from Design, Draw uses the final parameters and update a parameterized Fusion 360 design.
