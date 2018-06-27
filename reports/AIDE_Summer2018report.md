@@ -4,7 +4,7 @@ In this report, quoted lines give a more detailed description of how the compone
 > Skip over them if you only want to read a high-level explanation of the modules.
 
 ## AIDE
-AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temperature and produces the hydraulic design and building documentation for a water treatment plant. This AIDE tool will essentially be in charge of running the whole AIDE program and running the background modules, calling each separate parts of the design tool, including GUI, Design, Draw, and Document.It utilizes/runs all five of its submodules sequentially, while maintaining separation such that each module can be used to some degree on its own.
+AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temperature and produces the hydraulic design and building documentation for a water treatment plant. It utilizes/runs all five of its submodules sequentially, while maintaining separation such that each module can be used to some degree on its own.
 
 ### Summary of submodules
 1. **Template**: Contains scalable 3D models of water treatment plants and their respective building documentation, maintained by the aide_template team.
@@ -64,15 +64,14 @@ Now if you wanted to order a double-double, you would input number of patties to
 
 The goal for the summer is to finish the 3D models of all the components and test the assemblies to make sure all the components are linked properly. As parameter values change, the geometry of assemblies should change accordingly without interfering with other assemblies. Furthermore, we are trying to find the best naming convention for Template to use in order to have consistent parameter names throughout AIDE and prevent misunderstanding between subteams.
 
-### Naming Conventions
 
-The current naming convention is not consistent throughout Template or AIDE. In order to standardize the parameter names, we referenced the water treatment plant flowchart.
+### AIDE Template Organization on Fusion 360
 
 ![](waterplantflowchart.png)
 
----
 
-**POTENTIAL NAMING CONVENTION #1**
+
+### Naming Conventions
 
 Currently, the naming convention for parameter names is in the form of:
 
@@ -80,35 +79,33 @@ Currently, the naming convention for parameter names is in the form of:
 
 However, this was not consistently used during the previous semester, and different assemblies or components have inaccurate parameters. The new naming convention we are proposing is that the parameters do not describe which assembly or component they are part of.
 
-Instead of <font style="color:pink">Flocculator </font> <font style="color:lightgreen">\_ConcreteChannels </font> <font style="color:khaki">\_Length </font>, the parameter will be just called <font style="color:khaki">Length</font>.
+Instead of <font style="color:pink">Flocculator </font> <font style="color:lightgreen">\_ConcreteChannels </font> <font style="color:khaki">\_Length </font>, the parameter will be just called <font style="color:khaki"> length</font>.
+
+
+a_ : angle of ___
+
+n_ : number of ___
+
+b_ : distance between ___ (edge to edge)
+
+h_ : vertical height of ___
+
+<font style = "color:red"> FOR PIPES PLEASEEEEEEE </font>
+
+d : diameter
+
+sdr : standard dimensional ratio
+
+od : outer diameter of PIPES
+
+pipe wall thickness = od/sdr
 
 ---
+For tanks:
+length = z axis?
+width = x axis?
 
-**POTENTIAL NAMING CONVENTION #2**
-
-The naming convention will in the form of:
-
-<font style="color:pink"> (assembly) </font>
-<font style="color:lightgreen">\_(component) </font>
-<font style="color:khaki">\_(parameter) </font>
-
-An example would be:
-
-<font style="color:pink">Flocculator </font>
-<font style="color:lightgreen">\_ConcreteChannels </font>
-<font style="color:khaki">\_LengthWidth </font>
-
-If the assembly does not have a component, then it will be in the form of:
-
-<font style="color:pink"> (assembly) </font>
-<font style="color:khaki">\_(parameter) </font>
-
-An example would be:
-
-<font style="color:pink"> EntranceTank </font>
-<font style="color:khaki"> \_Height </font>
-
-This naming convention is still in discussion. Since there are lots of subcomponents, we are not completely certain that this method of naming parameters will be sustainable for future Template and Design subteams.
+---
 
 ## AIDE GUI
 When AIDE is run, it also initializes and runs another Fusion 360 add-in, AIDE GUI (Graphical User Interface). This GUI allows the user to input values (such as desired flow rate) that affect the dimensions of the finished water treatment plant.
@@ -164,13 +161,33 @@ We started out by restructuring the files in the top-most directory to contain t
 We now have the ability to output a YAML (`params.yaml` in the top level directory) containing the user's inputs for a given design. This is the YAML that will be passed on to the design team to do the calculations.
 > To do this, we added the `formToDict` function in `base.html`'s JavaScript that collects inputs within a HTML `<form>` object in `template.html`.
 
-## AIDE DESIGN
-Prob all wrong but just a very quick overview-- will read and fix it later----
+## AIDE Design
+Design runs hydraulic calculations based off of inputs from GUI, creating exact physical dimensions for each component.
 
-Design uses python code to do hydraulic calculations and pass the outputs to Draw. Design mainly writes python functions which will be used by Jinja to calculate the design parameters needed in Fusion to scale the model of an AguaClara plant. Design then passes another YAML to AIDE Draw. A lot of Mathcad code was written to account for geometric constraints. They also have a goal to have every function include a thorough docstring to communicate how the function should be used and what the expected outputs are.
+### How AIDE Design works
+Within the `aide_design` package, we have In this code, we are using the lfom.py for all of the calculations. Since our end goal is to create a lfom model, with this file, we use the YAML from aide_gui and complete the calculations necessary to be passed on to aide_draw.
 
-In this code, we are using the lfom.py for all of the calculations. Since our end goal is to create a lfom model, with this file, we use the YAML from aide_gui and complete the calculations necessary to be passed on to aide_draw.
+Right now, we are working as if `aide_design` was completed and running. In the run function in aide, we have written in a function that is replacing the design functions for now. In `lfom.yaml`, for the time being, we are only calculating one small thing, the spacing. After the YAML is changed with the new calculation, this YAML is then passed to AIDE Draw.
 
-Right now, we are working as if aide_design was completed and running. In the run function in aide, we have written in a function that is replacing the design functions for now. In lfom.yaml, for the time being, we are only calculating one small thing, the spacing. After the YAML is changed with the new calculation, this YAML is then passed to aide_draw.
+## AIDE Draw
+After the YAML is passed from Design, Draw uses the final parameters and update a parameterized Fusion 360 design.
+
+## How AIDE Draw works
+This is done by taking a YAML template file which specifies parameters for the Fusion design, reading those parameters and applying the changes to their corresponding values in Fusion 360 assemblies.
+
+## Progress
+The first thing that was done in the summer with aide_draw was get rid of any files and folders that we believed were not necessary. We still have yet to do a deep dive into the code and refactor any necessary functions, as well as change up the naming conventions to make it easier to develop on.
+
+## AIDE Document
+Using the specified physical parameters and documentation templates, Document generates completed build documentation for the hydraulic design of a water treatment plant.
+
+### How AIDE Document works
+`aide_document` is distributed via a PIP package, which can be installed on your computer by running `pip install aide_document`. There are a collection of functions in submodules that can then be accessed by a call of `module.function`:
+1. `combine`: Contains a function to combine YAML's with documentation templates via Jinja2.
+    - `render_document()`: Takes in a YAML and a Markdown template and combines the two, putting the result in a specified file location.
+2. `convert`: Converts the output Markdown file to a PDF.
+    - `md_to_pdf()`: Converts a specified Markdown file to a PDF file.
+3. `translate`: Translates a Markdown file to a different language using the Google Translate API.
+    - `translate()`: Translates Markdown between two different languages. Has the option of specifying special words to ignore the Google Translate translation and use your own translation.
 
 Thanks for reading! :D
