@@ -4,7 +4,7 @@ In this report, quoted lines give a more detailed description of how the compone
 > Skip over them if you only want to read a high-level explanation of the modules.
 
 ## AIDE
-AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temperature and produces the hydraulic design and building documentation for a water treatment plant. It utilizes/runs all five of its submodules sequentially, while maintaining separation such that each module can be used to some degree on its own.
+AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temperature and produces the hydraulic design and building documentation for a water treatment plant. This AIDE tool will essentially be in charge of running the whole AIDE program and running the background modules, calling each separate parts of the design tool, including GUI, Design, Draw, and Document.It utilizes/runs all five of its submodules sequentially, while maintaining separation such that each module can be used to some degree on its own.
 
 ### Summary of submodules
 1. **Template**: Contains scalable 3D models of water treatment plants and their respective building documentation, maintained by the aide_template team.
@@ -163,5 +163,14 @@ We started out by restructuring the files in the top-most directory to contain t
 #### Added functionality
 We now have the ability to output a YAML (`params.yaml` in the top level directory) containing the user's inputs for a given design. This is the YAML that will be passed on to the design team to do the calculations.
 > To do this, we added the `formToDict` function in `base.html`'s JavaScript that collects inputs within a HTML `<form>` object in `template.html`.
+
+## AIDE DESIGN
+Prob all wrong but just a very quick overview-- will read and fix it later----
+
+Design uses python code to do hydraulic calculations and pass the outputs to Draw. Design mainly writes python functions which will be used by Jinja to calculate the design parameters needed in Fusion to scale the model of an AguaClara plant. Design then passes another YAML to AIDE Draw. A lot of Mathcad code was written to account for geometric constraints. They also have a goal to have every function include a thorough docstring to communicate how the function should be used and what the expected outputs are.
+
+In this code, we are using the lfom.py for all of the calculations. Since our end goal is to create a lfom model, with this file, we use the YAML from aide_gui and complete the calculations necessary to be passed on to aide_draw.
+
+Right now, we are working as if aide_design was completed and running. In the run function in aide, we have written in a function that is replacing the design functions for now. In lfom.yaml, for the time being, we are only calculating one small thing, the spacing. After the YAML is changed with the new calculation, this YAML is then passed to aide_draw.
 
 Thanks for reading! :D
