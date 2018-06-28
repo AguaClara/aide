@@ -137,7 +137,7 @@ l_ : length of ___
 
 w_ : width of ___
 
-t_: thickness of ___
+t_ : thickness of ___
 
 <b> For Naming Pipes </b>
 
@@ -159,7 +159,7 @@ This is a Fusion model of an lfom from the flocculator. As you can see that the 
 
 Finally on the right side of the parameter window, you will see the comments section. This is a crucial for communication between team members. The comments describe the use of the parameter since the naming convention will not always be explicitly clear. For instance, n_row_1 may not be clear to other team members, but if you read the comment, it is now clear that n_row_1 is the number of orifices on row 1.
 
-In summary, this summer, AIDE Template will be creating a standardized parameter naming system and implementing it into the models, starting with the flocculator. Template will also work on organizing files in Fusion. :)
+In summary, this summer, AIDE Template will be creating a standardized parameter naming system and implementing it into the models, starting with the flocculator. Hopefully, Template will have a Variable Naming Wiki page like design does by end of this summer. We will also work on organizing files in Fusion. :)
 
 ## AIDE GUI
 When AIDE is run, it also initializes and runs another Fusion 360 add-in, AIDE GUI (Graphical User Interface). This GUI allows the user to input values (such as desired flow rate) that affect the dimensions of the finished water treatment plant.
