@@ -66,12 +66,11 @@ The goal for the summer is to finish the 3D models of all the components and tes
 
 ### AIDE Template Organization of components in Fusion 360
 
+Here is a flowchart describing the flow of water through a water treatment plant's components:
+
 ![](waterplantflowchart.png)
 
-We referenced (but is not identical) to the flowchart for the organization.
-The folders are created in a hierarchical order. There are four main folders that are main assemblies in the water plant. Within each main folder, they all have a finalized components folder and sub-assembly folders are created for subassemblies with the main assembly.
-
-I feel like this doesn’t make any sense fuck----Good but we might need to take this out-- just a thought
+We based the file organization structure off of this flow chart. The folders are organized hierarchically. There are four main folders that represent the main assemblies in the water plant. Within each main folder, there is a finalized components folder and sub-assembly folders are created for sub-assemblies with the main assembly. In general, these sub-assembly folders contain unfinished components that aren't ready to be put into the finalized components folder.
 
 <p>
   <ul>
@@ -145,11 +144,13 @@ pipe wall thickness = od/sdr
 
 l_pipe : length of pipe
 
-WE NEVER HAVE PARAMETERS FOR INNER DIAMETER OR PIPE WALL THICKNESS
-
 ![](lfom.png)
 
-This is a Fusion model of an lfom from the flocculator. As you can see that the parameter names follow the naming convention. If you look more carefully, you will see that there is an underscore ( \_ ) in front of some parameter names. Those are called <b>private variables</b>. The underscore in front of the parameter indicates to the AIDE Design that this variable's expression should not be altered. This method will used for parameters with equations most of the time. Finally on the right side of the parameter window, you will see the comments section. This is a crucial for communication between team members. The comments will describe what the parameter is for since the naming convention will not always be explicitly clear. For instance, n_row_1 may not be clear to other team members, but if you read the comment, it is now clear that n_row_1 is the number of orifices on row 1.
+This is a Fusion model of an lfom from the flocculator. As you can see that the parameter names follow the naming convention.
+
+> If you look more carefully, you will see that there is an underscore ( \_ ) in front of some parameter names. Those are called <b>private variables</b>. The underscore in front of the parameter indicates to the AIDE Design that this variable's expression should not be altered. This method will be used for parameters with equations most of the time.
+
+Finally on the right side of the parameter window, you will see the comments section. This is a crucial for communication between team members. The comments describe the use of the parameter since the naming convention will not always be explicitly clear. For instance, n_row_1 may not be clear to other team members, but if you read the comment, it is now clear that n_row_1 is the number of orifices on row 1.
 
 In summary, this summer, AIDE Template will be creating a standardized parameter naming system and implementing it into the models, starting with the flocculator. Template will also work on organizing files in Fusion. :)
 
