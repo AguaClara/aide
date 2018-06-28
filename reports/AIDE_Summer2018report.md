@@ -4,7 +4,7 @@ In this report, quoted lines give a more detailed description of how the compone
 > Skip over them if you only want to read a high-level explanation of the modules.
 
 ## AIDE
-AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temperature and produces the hydraulic design and building documentation for a water treatment plant. It utilizes/runs all five of its submodules sequentially, while maintaining separation such that each module can be used to some degree on its own.
+AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temperature and produces the hydraulic design and building documentation for a water treatment plant. It utilizes/runs all five of its submodules sequentially, while maintaining separation such that each module can be used on its own to some degree .
 
 ### Summary of submodules
 1. **Template**: Contains scalable 3D models of water treatment plants and their respective building documentation, maintained by the aide_template team.
@@ -50,7 +50,7 @@ Template utilizes Fusion 360, a CAD software, to create 3D models of the water t
 
 To better understand Template, let's think of a Design template as a burger. Usually when you order a burger, you get a patty, slice of cheese, lettuce, and tomato. The number of each part of the burger can be parametrized as seen below.
 
-Now if you wanted to order a double-double, you would input number of patties to equal 2. Within Fusion 360, AIDE and its submodules will take this input and update the parameters for cheese, lettuce and tomato.
+Now if you wanted to order a double cheese and double patties, you would input number of patties to equal 2. Within Fusion 360, AIDE and its submodules will take this input and update the parameters for cheese, lettuce and tomato.
 
 <font style="color:lightblue"> Number of patties = 2 </font>
 <br>
@@ -68,6 +68,48 @@ The goal for the summer is to finish the 3D models of all the components and tes
 
 ![](waterplantflowchart.png)
 
+We referenced (but is not identical) to the flowchart for the organization.
+The folders are created in a hierarchical order. There are four main folders that are main assemblies in the water plant. Within each main folder, they all have a finalized components folder and sub-assembly folders are created for subassemblies with the main assembly.
+
+I feel like this doesn’t make any sense fuck----Good but we might need to take this out-- just a thought
+
+<p>
+  <ul>
+    <li>Concrete structures </li>
+      <ul>
+      <li>Finalized components</li>
+      </ul>  
+    <li>Flocculator</li>
+      <ul>
+      <li>Finalized components</li>
+      <li>Concrete Channels</li>
+      <li>Top Baffles</li>
+      <li>Bottom Baffles</li>
+      <li>Obstacles</li>
+      <li>Structural Pipes</li>
+      <li>Plant Entrance Tank</li>
+      </ul>
+    <li>Filter</li>
+      <ul>
+      <li>Finalized components</li>
+      <li>Filter Control Box</li>
+        <ul>
+        <li>Hinge Weir</li>
+        </ul>
+      <li>Concrete Tank</li>
+      <li>Entrance Tank</li>
+      <li>Pipe Gallery</li>
+      </ul>
+    <li>Sedimentation tank</li>
+      <ul>
+      <li>Plate Settler</li>
+      <li>Plate Supports</li>
+      <li>Tank & Channel</li>
+      </ul>  
+
+  </ul>
+</p>
+
 ### Naming Conventions
 
 Currently, the naming convention for parameter names is in the form of:
@@ -81,13 +123,17 @@ Instead of <font style="color:pink">Flocculator </font> <font style="color:light
 
 a_ : angle of ___
 
-n_ : number of ___
+n_ : number of ___ (should be unitless)
 
 b_ : distance between ___ (edge to edge)
 
 h_ : vertical height of ___
 
-<font style = "color:red"> FOR PIPES PLEASEEEEEEE </font>
+l_ : length of ___
+
+w_ : width of ___
+
+<b> For Naming Pipes </b>
 
 d : diameter
 
@@ -97,12 +143,15 @@ od : outer diameter of PIPES
 
 pipe wall thickness = od/sdr
 
----
-For tanks:
-length = z axis?
-width = x axis?
+l_pipe : length of pipe
 
----
+WE NEVER HAVE PARAMETERS FOR INNER DIAMETER OR PIPE WALL THICKNESS
+
+![](lfom.png)
+
+This is a Fusion model of an lfom from the flocculator. As you can see that the parameter names follow the naming convention. If you look more carefully, you will see that there is an underscore ( \_ ) in front of some parameter names. Those are called <b>private variables</b>. The underscore in front of the parameter indicates to the AIDE Design that this variable's expression should not be altered. This method will used for parameters with equations most of the time. Finally on the right side of the parameter window, you will see the comments section. This is a crucial for communication between team members. The comments will describe what the parameter is for since the naming convention will not always be explicitly clear. For instance, n_row_1 may not be clear to other team members, but if you read the comment, it is now clear that n_row_1 is the number of orifices on row 1.
+
+In summary, this summer, AIDE Template will be creating a standardized parameter naming system and implementing it into the models, starting with the flocculator. Template will also work on organizing files in Fusion. :)
 
 ## AIDE GUI
 When AIDE is run, it also initializes and runs another Fusion 360 add-in, AIDE GUI (Graphical User Interface). This GUI allows the user to input values (such as desired flow rate) that affect the dimensions of the finished water treatment plant.
