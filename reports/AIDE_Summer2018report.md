@@ -141,7 +141,7 @@ t_ : thickness of ___
 
 <b> For Naming Pipes </b>
 
-d : diameter
+d_ : diameter of
 
 sdr : standard dimensional ratio
 
@@ -150,6 +150,8 @@ od : outer diameter of PIPES
 pipe wall thickness = od/sdr
 
 l_pipe : length of pipe
+
+oal_ : overall length
 
 ![](lfom.png)
 
