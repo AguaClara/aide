@@ -70,7 +70,12 @@ Here is a flowchart describing the flow of water through a water treatment plant
 
 ![](waterplantflowchart.png)
 
-We based the file organization structure off of this flow chart. The folders are organized hierarchically. There are four main folders that represent the main assemblies in the water plant. Within each main folder, there is a finalized components folder and sub-assembly folders are created for sub-assemblies with the main assembly. In general, these sub-assembly folders contain unfinished components that aren't ready to be put into the finalized components folder.
+We based the file organization structure off of this flow chart. The folders are
+organized hierarchically. There are four main folders that represent the main
+assemblies in the water plant. Within each main folder, there is a finalized
+components folder and sub-assembly folders are created for sub-assemblies with
+the main assembly. In general, these sub-assembly folders contain unfinished
+components that aren't ready to be put into the finalized components folder.
 
 <p>
   <ul>
@@ -131,6 +136,8 @@ h_ : vertical height of ___
 l_ : length of ___
 
 w_ : width of ___
+
+t_: thickness of ___
 
 <b> For Naming Pipes </b>
 
