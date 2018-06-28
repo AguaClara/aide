@@ -153,6 +153,8 @@ l_pipe : length of pipe
 
 oal_ : overall length
 
+socket_depth : socket depth or how far the pipe can be inserted into the socket
+
 ![](lfom.png)
 
 This is a Fusion model of an lfom from the flocculator. As you can see that the parameter names follow the naming convention.
