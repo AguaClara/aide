@@ -1,12 +1,16 @@
 # AIDE - Summer Research Report #1
 
+<!--- Add your names, netids, and the date you wrote this!--->
+
 In this report, quoted lines give a more detailed description of how the components work in the background.
 > Skip over them if you only want to read a high-level explanation of the modules.
 
 ## AIDE
-AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temperature and produces the hydraulic design and building documentation for a water treatment plant. It utilizes/runs all five of its submodules sequentially, while maintaining separation such that each module can be used on its own to some degree .
-
+<!---Define the AIDE acronym --->
+AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temperature and produces the hydraulic design and building documentation for a water treatment plant. It utilizes/runs all five of its submodules sequentially, while maintaining separation such that each module can be used on its own to some degree.
+<!---Maybe add some documentation on the purpose of AIDE, and how it will be used when it is complete (the motivation behind your work)--->
 ### Summary of submodules
+<!---It would be cool to have photos of each submodule (a picture of the GUI, 3D models, Documentation)  Maybe not in this report but in a future complete document about AIDE (which this could become) --->
 1. **Template**: Contains scalable 3D models of water treatment plants and their respective building documentation, maintained by the aide_template team.
 2. **GUI** (Graphical User Interface): Displays a user interface in Fusion 360, collects the required input values from the user, and compiles them into a YAML file.
 3. **Design**: Runs calculations to form all of the physical parameters of a water treatment plant, based off of the inputs collected by the GUI.
@@ -15,24 +19,24 @@ AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temp
 
 Here is a chart detailing the flow of information throughout each module:
 ![](info_flow_modules.jpg)
-
+<!---It's a little confusing where this process begins and ends from the document.  I would change the arrows from GUI through Document (maybe make them larger and red?) to show that that is the direct flow of AIDE --->
 Here is a chart detailing the flow of information relative to each file:
 ![](info_flow_files.jpg)
 
 For an explanation of some of the terms that are used above, see our [ReadMe](https://github.com/AguaClara/aide/blob/master/README.md).
-
+<!---If possible define all terms in document (even if you are just copying from the readme) --->
 ### How AIDE works
 In order to use this custom Fusion 360 addin, you must open Fusion 360 > Scripts & Add-Ins > Add-Ins > Green Plus, then select the file location where you have the AIDE folder downloaded/`git clone`'d. Then, select aide > Run.
 
 > Note that before development on AIDE has finished, you will have to also download and move all of the other AIDE modules into this AIDE folder, but assume for now that they are already in AIDE.
 
 The GUI is then opened up for the user.
-
+<!---Again pictures would be very helpful.  Consider also making a video of the entire process --->
 > In `aide.py`, required dependencies are imported at the top. Then, the `run(context)` function is run, initializing AIDE GUI with `aide_gui.main_run(context, run_design)`. The `run_design` function contains calls to AIDE Design/Draw/Document, and is run by AIDE GUI.
 
 After the user enters their inputs, AIDE Design/Draw/Document are run sequentially, as long as the user has the selected component open in Fusion 360.
 
-> `aide_gui.py` passes `run_design()` as the `on_Success` function and runs it after the user inputs parameters within `MyHTMLEventHandler.notify()`. This function accesses the Fusion 360 UI and loads the the user input YAML and the Design YAML, the latter of which contains the physical parameters for the selected component. Finally, `load_yaml_and_update_params` is called and the component that is being displayed in Fusion 360.
+> `aide_gui.py` passes `run_design()` as the `on_Success` function and runs it after the user inputs parameters within `MyHTMLEventHandler.notify()`. This function accesses the Fusion 360 UI and loads the user input YAML and the Design YAML, the latter of which contains the physical parameters for the selected component. Finally, `load_yaml_and_update_params` is called and the component that is being displayed in Fusion 360.
 
 > Note that the current iteration of `aide.py` is incomplete and contains only rudimentary placeholders for `aide_design` and `aide_draw`. Once those two submodules are complete, a full implementation will be developed.
 
@@ -119,9 +123,9 @@ components that aren't ready to be put into the finalized components folder.
 Currently, the naming convention for parameter names is in the form of:
 
 (sub-assembly)\_(components)\_(parameters)
-
 However, this was not consistently used during the previous semester, and different assemblies or components have inaccurate parameters. The new naming convention we are proposing is that the parameters do not describe which assembly or component they are part of.
-
+<!---Explain why this is better than other options. --->
+<!---Have you documented this in other places?  (The AIDE_Template wiki?) Include a link to those locations for reference--->
 Instead of <font style="color:pink">Flocculator </font> <font style="color:lightgreen">\_ConcreteChannels </font> <font style="color:khaki">\_Length </font>, the parameter will be just called <font style="color:khaki"> length</font>.
 
 
@@ -167,10 +171,10 @@ In summary, this summer, AIDE Template will be creating a standardized parameter
 
 ## AIDE GUI
 When AIDE is run, it also initializes and runs another Fusion 360 add-in, AIDE GUI (Graphical User Interface). This GUI allows the user to input values (such as desired flow rate) that affect the dimensions of the finished water treatment plant.
-
+<!---add photo of GUI! --->
 ### How AIDE GUI works
 In order to use AIDE GUI, you must first have AIDE installed and set up, with the AIDE GUI folder within the AIDE folder. You then open Fusion 360 > Scripts & Add-Ins > Add-Ins > aide > Run. The palette window then opens on the right.
-
+<!---Add photo of run process! --->
 > Fusion uses `aide_gui.py` to begin running the palette. At the top are imports for all of the packages that are used and global variables that are referenced when the add-in is run.
 
 > The `main_run(context, onSuccess)` function is then run. After loading global variables and helper functions, the `showPalette` command is defined. This command will be responsible for showing the palette. Normally, this would display a button under one of Fusion's dropdown menus, but we've omitted that functionality. Instead of manually showing the palette with a button, it opens and closes when the add-in is run or stopped.
@@ -232,6 +236,7 @@ In the current iteration of AIDE, we are first testing the creation of a LFOM de
 
 > Right now, we are working as if `aide_design` was completed and running. In the run function in aide, we have written in a function that is replacing the design functions for now. In `lfom.yaml`, for the time being, we are only calculating one small thing, the spacing. After the YAML is changed with the new calculation, this YAML is then passed to AIDE Draw.
 
+<!---For next report, remember to update with where AIDE design is now, and what needs to be fixed --->
 ## AIDE Draw
 After the YAML is passed from Design, Draw uses the final parameters and update a parameterized Fusion 360 design.
 
@@ -252,5 +257,7 @@ Using the specified physical parameters and documentation templates, Document ge
     - `md_to_pdf()`: Converts a specified Markdown file to a PDF file.
 3. `translate`: Translates a Markdown file to a different language using the Google Translate API.
     - `translate()`: Translates Markdown between two different languages. Has the option of specifying special words to ignore the Google Translate translation and use your own translation.
+
+<!---Add a progress section, even if it just says that you won't be working on Document because it's done --->
 
 Thanks for reading! :D
