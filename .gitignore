@@ -1,6 +1,10 @@
-# AguaClara Packages
+# AIDE submodules
 aide_gui
 aide_draw
+aide_render
+
+# Data folder
+data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

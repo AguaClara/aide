@@ -10,6 +10,7 @@ sys.path.append(abs_path('.'))
 
 from .aide_gui import aide_gui, helper
 from .aide_draw import load_yaml_and_update_params
+from .aide_render import render_lfom
 
 # Global list to keep all event handlers in scope.
 handlers = []
@@ -37,10 +38,10 @@ def stop(context):
 def run_design():
     app = adsk.core.Application.get()
     ui  = app.userInterface
-    input_params = helper.load_yaml(abs_path("aide_gui/params.yaml"))
-    lfom_params = helper.load_yaml(abs_path("lfom.yaml"))
-    lfom_params['LFOM_1']['dp']['spacing'] = str(int(input_params['q']) * 2)
-    lfom_path = abs_path('lfom.yaml')
-    helper.write_yaml(lfom_path, lfom_params)
+
+    # Run aide_design on user inputs and outputs the resulting physical parameters.
+    render_lfom('aide_gui/params.yaml', 'lfom.yaml')
+
+    # Run aide_draw to change Fusion 360 drawing.
     rootComponent = adsk.fusion.FusionDocument.cast(app.activeProduct.parentDocument).design.rootComponent
-    load_yaml_and_update_params(lfom_path, rootComponent)
+    load_yaml_and_update_params('lfom.yaml', rootComponent)
