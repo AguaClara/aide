@@ -16,6 +16,8 @@ def abs_path(file_path):
 
 # Import local dependencies.
 sys.path.append(abs_path('.'))
+sys.path.append(r"C:\Users\EN-CE-AC\AppData\Local\Continuum\anaconda3\envs\aide\lib\site-packages")
+
 from .aide_gui import aide_gui, helper
 from .aide_draw import load_yaml_and_update_params
 from .aide_render import render_lfom
