@@ -1,7 +1,8 @@
 # AIDE submodules
 aide_gui
-aide_draw
 aide_render
+aide_design
+aide_draw
 
 # Data folder
 data

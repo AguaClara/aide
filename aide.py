@@ -1,47 +1,55 @@
-import sys, os, inspect, importlib
-import adsk.core, adsk.fusion, adsk.cam, traceback # Fusion 360 imports
+import sys, adsk.core, adsk.fusion, traceback
+from importlib import reload
+from os.path import join, dirname, abspath
 
-
-# Takes a relative file path (String) to the calling file and returns the correct absolute path (String). Needed because the Fusion 360 environment doesn't resolve relative paths well.
 def abs_path(file_path):
-    return os.path.join(os.path.dirname(inspect.getfile(sys._getframe(1))), file_path)
+    """
+    Returns the absolute path from the file that calls this function to file_path. Needed to access other files within aide_gui when initialized by aide.
 
+    Parameters
+    ----------
+    file_path: String
+        The relative file path from the file that calls this function.
+    """
+
+    return join(dirname(abspath(__file__)), file_path)
+
+# Import local dependencies.
 sys.path.append(abs_path('.'))
-
 from .aide_gui import aide_gui, helper
 from .aide_draw import load_yaml_and_update_params
 from .aide_render import render_lfom
 
-# Global list to keep all event handlers in scope.
-handlers = []
-
 def run(context):
-    importlib.reload(aide_gui)
-    ui = None
+    reload(aide_gui)
+
     try:
-        app = adsk.core.Application.get()
-        ui  = app.userInterface
-        aide_gui.main_run(context, run_design)
+        f360_app = adsk.core.Application.get()
+        f360_ui  = f360_app.userInterface
+
+        aide_gui.run(context, run_design)
+
     except:
-        if ui:
-            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+        if f360_ui:
+            f360_ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 def stop(context):
     try:
-        app = adsk.core.Application.get()
-        ui  = app.userInterface
-        aide_gui.main_stop(context)
+        f360_app = adsk.core.Application.get()
+        f360_ui  = f360_app.userInterface
+        
+        aide_gui.stop(context)
+
     except:
-        if ui:
-            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+        if f360_ui:
+            f360_ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 def run_design():
-    app = adsk.core.Application.get()
-    ui  = app.userInterface
+    f360_app = adsk.core.Application.get()
+    f360_ui  = f360_app.userInterface
 
-    # Run aide_design on user inputs and outputs the resulting physical parameters.
-    render_lfom('aide_gui/params.yaml', 'lfom.yaml')
+    render_lfom('aide_gui/data/params.yaml', 'lfom.yaml')
 
     # Run aide_draw to change Fusion 360 drawing.
-    rootComponent = adsk.fusion.FusionDocument.cast(app.activeProduct.parentDocument).design.rootComponent
+    rootComponent = adsk.fusion.FusionDocument.cast(f360_app.activeProduct.parentDocument).design.rootComponent
     load_yaml_and_update_params('lfom.yaml', rootComponent)
