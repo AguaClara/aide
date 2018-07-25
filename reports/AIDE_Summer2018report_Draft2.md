@@ -1,6 +1,6 @@
 # AIDE - Summer Research Report #1
 
-<!--- Add your names, netids, and the date you wrote this!--->
+<Anishka Singh as2643, Emma Sung, Oliver Leung, Gabby Peralta-->
 
 In this report, quoted lines give a more detailed description of how the components work in the background.
 > Skip over them if you only want to read a high-level explanation of the modules.
@@ -45,6 +45,13 @@ After the user enters their inputs, AIDE Design/Draw/Document are run sequential
 After much discussion, we came to a conclusion of having our AIDE module be the overall controller, separate from the individual submodules of AIDE. This AIDE module will essentially be in charge of running the whole AIDE program and running GUI, Design, Draw, and Document sequentially.
 
 > We did so using a technique known as the [observer pattern](https://en.wikipedia.org/wiki/Observer_pattern), where, instead of passing objects like integers and strings as function parameters, we're able to pass an entire function as a parameter. Then, this "`onSuccess`" function is called whenever it is needed.
+
+##Transition to OnShape
+
+Right now the team is in the middle of transitioning from Fusion 360 to OnShape. OnShape is a CADing software system that is also a web browser. OnShape has much of the specific functionality that we were missing in Fusion 360. We hope that after exploring the features of OnShape, we will be able to compare and contrast the two CAD options and make a final decision.
+
+## FeatureScript
+Along with learning the different parts and pieces of the CADing process involved with OnShape, we are also in the process of learning Feature Script, the language used in OnShape. By the end of the next two weeks, we hope to create a LFOM feature to simply LFOM creation.
 
 ## AIDE TEMPLATE
 
@@ -169,6 +176,14 @@ Finally on the right side of the parameter window, you will see the comments sec
 
 In summary, this summer, AIDE Template will be creating a standardized parameter naming system and implementing it into the models, starting with the flocculator. Hopefully, Template will have a Variable Naming Wiki page like design does by end of this summer. We will also work on organizing files in Fusion. :)
 
+## TEMPLATE pt 2! #Summer #litCity #2weeksleft
+Since last time, the flocculator has been finished (all parameters have been renamed and some geometry have been fixed). Now, there is a wiki page for Parameter Naming Convention and it also explains naming convention for any pipes and private variables.
+
+However, Template has undergone many changes the past few weeks. We may transition into Onshape, a different 3D modeling program. We are currently working on making the 3D models of pipe fittings to learn more about Onshape and discussing with Ethan if this will be a good switch. The benefits of switching to Onshape are...... <b> blah blah add more stuff here</b>. While Onshape has many benefits, the downside is that Template will have to make the treatment plant again from scratch.
+
+For rest of this week, we will be finishing the pipe gallery on Onshape.
+For next week, Template will be mainly working on preparing tutorials for Onshape, since it has different features compared to Fusion 360. Hopefully decide how to organize the parameters and files to prevent from the same mistakes as we made in Fusion. We will also discuss team size and organization for Fall. :) yayayayayyyyyyy weeheeeeeeeoooo
+
 ## AIDE GUI
 When AIDE is run, it also initializes and runs another Fusion 360 add-in, AIDE GUI (Graphical User Interface). This GUI allows the user to input values (such as desired flow rate) that affect the dimensions of the finished water treatment plant.
 <!---add photo of GUI! --->
@@ -223,6 +238,9 @@ We started out by restructuring the files in the top-most directory to contain t
 We now have the ability to output a YAML (`params.yaml` in the top level directory) containing the user's inputs for a given design. This is the YAML that will be passed on to the design team to do the calculations.
 > To do this, we added the `formToDict` function in `base.html`'s JavaScript that collects inputs within a HTML `<form>` object in `template.html`.
 
+##Progress 2
+After finishing the LFOM, much of the work has been done with Aide Gui. We have been testing the code using Travis CI, but always get errors that are outside of our control and have to do with other parts of AIDE, such as AIDE draw and AIDE design.
+
 ## AIDE Design
 Design runs hydraulic calculations based off of inputs from GUI, creating exact physical dimensions for each component.
 
@@ -246,6 +264,9 @@ This is done by taking a YAML template file which specifies parameters for the F
 ## Progress
 The first thing that was done in the summer with aide_draw was get rid of any files and folders that we believed were not necessary. We still have yet to do a deep dive into the code and refactor any necessary functions, as well as change up the naming conventions to make it easier to develop on.
 
+## Progress 2
+We have also been testing AIDE draw on Travis CI to make sure that it passes all tests. So far it has been failing. Ethan has been
+
 ## AIDE Document
 Using the specified physical parameters and documentation templates, Document generates completed build documentation for the hydraulic design of a water treatment plant.
 
@@ -259,5 +280,8 @@ Using the specified physical parameters and documentation templates, Document ge
     - `translate()`: Translates Markdown between two different languages. Has the option of specifying special words to ignore the Google Translate translation and use your own translation.
 
 <!---Add a progress section, even if it just says that you won't be working on Document because it's done --->
+## Team reorganization
+Also in talks is the potential reorganization of the of the AIDE team. Since next semester we will not be focusing on GUI and Document, we will need to restructure the team. We will still need a template team, which will be in charge of redoing all of the CADing in OnShape. The size of the team is not confirmed. This past semester, we had a larger subteam, which made communication harder at times. That is also something that will be taken into consideration, when trying to form teams next semester.
+
 
 Thanks for reading! :D
