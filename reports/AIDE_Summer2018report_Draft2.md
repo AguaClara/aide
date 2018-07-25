@@ -1,16 +1,22 @@
-# AIDE - Summer Research Report #1
+# AIDE - Summer Research Report #1 - 2nd Draft
 
-<!--- Add your names, netids, and the date you wrote this!--->
+- *Date: July 27th, 2018*
+- *Written by: Anishka Singh (as2643), Emma Sung (hs699), Gabby Peralta (gp275), Oliver Leung (oal22).*
 
 In this report, quoted lines give a more detailed description of how the components work in the background.
 > Skip over them if you only want to read a high-level explanation of the modules.
 
-## AIDE
-<!---Define the AIDE acronym --->
-AIDE is a Fusion 360 add-in that takes in user parameters for flow rate and temperature and produces the hydraulic design and building documentation for a water treatment plant. It utilizes/runs all five of its submodules sequentially, while maintaining separation such that each module can be used on its own to some degree.
-<!---Maybe add some documentation on the purpose of AIDE, and how it will be used when it is complete (the motivation behind your work)--->
+## AIDE: AguaClara Infrastructure Design Engine
+
+AIDE is a Fusion 360 add-in that produces the hydraulic design and building documentation for a water treatment plant, depending on the water demand of the community that will be using the plant.
+
+The AIDE project was started in order to replace the responsibilities of the Design Team, an AguaClara subteam that was responsible for manually adjusting the designs of AguaClara's water treatment plants to fit each community's water needs. With a software tool, the process of designing a plant becomes much faster and requires less manpower. Also, AIDE can be *distributed to/improved by* anyone in the world with an internet connection, fulfilling AguaClara's devotion to open source technology
+
 ### Summary of submodules
+
 <!---It would be cool to have photos of each submodule (a picture of the GUI, 3D models, Documentation)  Maybe not in this report but in a future complete document about AIDE (which this could become) --->
+The main AIDE program runs a set of submodules, each of which serves a different purpose. Each submodule can also be used independently from AIDE, albeit with reduced functionality.
+
 1. **Template**: Contains scalable 3D models of water treatment plants and their respective building documentation, maintained by the aide_template team.
 2. **GUI** (Graphical User Interface): Displays a user interface in Fusion 360, collects the required input values from the user, and compiles them into a YAML file.
 3. **Design**: Runs calculations to form all of the physical parameters of a water treatment plant, based off of the inputs collected by the GUI.
@@ -25,7 +31,9 @@ Here is a chart detailing the flow of information relative to each file:
 
 For an explanation of some of the terms that are used above, see our [ReadMe](https://github.com/AguaClara/aide/blob/master/README.md).
 <!---If possible define all terms in document (even if you are just copying from the readme) --->
+
 ### How AIDE works
+
 In order to use this custom Fusion 360 addin, you must open Fusion 360 > Scripts & Add-Ins > Add-Ins > Green Plus, then select the file location where you have the AIDE folder downloaded/`git clone`'d. Then, select aide > Run.
 
 > Note that before development on AIDE has finished, you will have to also download and move all of the other AIDE modules into this AIDE folder, but assume for now that they are already in AIDE.
@@ -41,7 +49,9 @@ After the user enters their inputs, AIDE Design/Draw/Document are run sequential
 > Note that the current iteration of `aide.py` is incomplete and contains only rudimentary placeholders for `aide_design` and `aide_draw`. Once those two submodules are complete, a full implementation will be developed.
 
 ### Progress
+
 #### Module organization
+
 After much discussion, we came to a conclusion of having our AIDE module be the overall controller, separate from the individual submodules of AIDE. This AIDE module will essentially be in charge of running the whole AIDE program and running GUI, Design, Draw, and Document sequentially.
 
 > We did so using a technique known as the [observer pattern](https://en.wikipedia.org/wiki/Observer_pattern), where, instead of passing objects like integers and strings as function parameters, we're able to pass an entire function as a parameter. Then, this "`onSuccess`" function is called whenever it is needed.
@@ -81,42 +91,27 @@ components folder and sub-assembly folders are created for sub-assemblies with
 the main assembly. In general, these sub-assembly folders contain unfinished
 components that aren't ready to be put into the finalized components folder.
 
-<p>
-  <ul>
-    <li>Concrete structures </li>
-      <ul>
-      <li>Finalized components</li>
-      </ul>  
-    <li>Flocculator</li>
-      <ul>
-      <li>Finalized components</li>
-      <li>Concrete Channels</li>
-      <li>Top Baffles</li>
-      <li>Bottom Baffles</li>
-      <li>Obstacles</li>
-      <li>Structural Pipes</li>
-      <li>Plant Entrance Tank</li>
-      </ul>
-    <li>Filter</li>
-      <ul>
-      <li>Finalized components</li>
-      <li>Filter Control Box</li>
-        <ul>
-        <li>Hinge Weir</li>
-        </ul>
-      <li>Concrete Tank</li>
-      <li>Entrance Tank</li>
-      <li>Pipe Gallery</li>
-      </ul>
-    <li>Sedimentation tank</li>
-      <ul>
-      <li>Plate Settler</li>
-      <li>Plate Supports</li>
-      <li>Tank & Channel</li>
-      </ul>  
-
-  </ul>
-</p>
+- Concrete structures
+  - Finalized components
+- Flocculator
+  - Finalized components
+  - Concrete Channels
+  - Top Baffles
+  - Bottom Baffles
+  - Obstacles
+  - Structural Pipes
+  - Plant Entrance Tank
+- Filter
+  - Finalized components
+  - Filter Control Box
+    - Hinge Weir
+  - Concrete Tank
+  - Entrance Tank
+  - Pipe Gallery
+- Sedimentation tank
+  - Plate Settler
+  - Plate Supports
+  - Tank & Channel
 
 ### Naming Conventions
 
