@@ -265,7 +265,11 @@ When AIDE is run, it also initializes and runs another Fusion 360 add-in, AIDE G
 ## How AIDE GUI works
 
 In order to use AIDE GUI, you must first have AIDE installed and set up, with the AIDE GUI folder within the AIDE folder. You then open Fusion 360 > Scripts & Add-Ins > Add-Ins > aide > Run. The palette window then opens on the right.
-<!---Add photo of run process! --->
+
+![](https://raw.githubusercontent.com/AguaClara/aide/master/reports/run_window.PNG)
+
+![](https://raw.githubusercontent.com/AguaClara/aide/master/reports/gui_window.PNG)
+
 > Fusion uses `aide_gui.py` to begin running the palette. At the top are imports for all of the packages that are used and global variables that are referenced when the add-in is run.
 
 > The `main_run(context, onSuccess)` function is then run. After loading global variables and helper functions, the `showPalette` command is defined. This command will be responsible for showing the palette. Normally, this would display a button under one of Fusion's dropdown menus, but we've omitted that functionality. Instead of manually showing the palette with a button, it opens and closes when the add-in is run or stopped.
