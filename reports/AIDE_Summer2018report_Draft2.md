@@ -2,55 +2,58 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [AIDE - Summer Research Report #1 - 2nd Draft](#aide---summer-research-report-1---2nd-draft)
-  - [AIDE: AguaClara Infrastructure Design Engine](#aide-aguaclara-infrastructure-design-engine)
+- [AIDE: AguaClara Infrastructure Design Engine](#aide-aguaclara-infrastructure-design-engine)
+  - [How AIDE works](#how-aide-works)
     - [Summary of submodules](#summary-of-submodules)
     - [Glossary](#glossary)
-    - [How AIDE works](#how-aide-works)
-    - [Progress](#progress)
-      - [Module organization](#module-organization)
+    - [Running AIDE](#running-aide)
+  - [Progress Report 1](#progress-report-1)
+    - [Module organization](#module-organization)
+  - [Progress Report 2](#progress-report-2)
     - [Transition to OnShape](#transition-to-onshape)
     - [FeatureScript](#featurescript)
-  - [AIDE TEMPLATE](#aide-template)
-    - [How AIDE Template works](#how-aide-template-works)
-    - [AIDE Template Organization of components in Fusion 360](#aide-template-organization-of-components-in-fusion-360)
+    - [Travis CI and Codecov](#travis-ci-and-codecov)
+- [AIDE Template](#aide-template)
+  - [How AIDE Template works](#how-aide-template-works)
+    - [Organization of components in Fusion 360](#organization-of-components-in-fusion-360)
     - [Naming Conventions](#naming-conventions)
-  - [TEMPLATE pt 2!](#template-pt-2)
-  - [AIDE GUI](#aide-gui)
-    - [How AIDE GUI works](#how-aide-gui-works)
-    - [Progress](#progress-1)
-      - [File reorganization](#file-reorganization)
-      - [Added functionality](#added-functionality)
-    - [Progress 2](#progress-2)
-  - [AIDE Design](#aide-design)
-    - [How AIDE Design works](#how-aide-design-works)
-    - [Progress](#progress-2)
-  - [AIDE Draw](#aide-draw)
+  - [Progress Report 2](#progress-report-2-1)
+    - [Transition to Onshape](#transition-to-onshape)
+- [AIDE GUI](#aide-gui)
+  - [How AIDE GUI works](#how-aide-gui-works)
+  - [Progress](#progress)
+    - [File reorganization](#file-reorganization)
+    - [Added functionality](#added-functionality)
+- [AIDE Design](#aide-design)
+  - [How AIDE Design works](#how-aide-design-works)
+  - [Progress Report 2](#progress-report-2-2)
+- [AIDE Draw](#aide-draw)
   - [How AIDE Draw works](#how-aide-draw-works)
-  - [Progress](#progress-3)
-  - [Progress 2](#progress-2-1)
-  - [AIDE Document](#aide-document)
-    - [How AIDE Document works](#how-aide-document-works)
+  - [Progress](#progress-1)
+  - [Progress 2](#progress-2)
+- [AIDE Document](#aide-document)
+  - [How AIDE Document works](#how-aide-document-works)
+  - [Team reorganization](#team-reorganization)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# AIDE - Summer Research Report #1 - 2nd Draft
+*Date: July 27th, 2018*
 
-- *Date: July 27th, 2018*
-- *Written by: Anishka Singh (as2643), Emma Sung (hs699), Gabby Peralta (gp275), Oliver Leung (oal22).*
+*Written by: Anishka Singh (as2643), Emma Sung (hs699), Gabby Peralta (gp275), Oliver Leung (oal22).*
 
 In this report, quoted lines give a more detailed description of how the components work in the background.
 > Skip over them if you only want to read a high-level explanation of the modules.
 
-## AIDE: AguaClara Infrastructure Design Engine
+# AIDE: AguaClara Infrastructure Design Engine
 
 AIDE is a Fusion 360 add-in that produces the hydraulic design and building documentation for a water treatment plant, depending on the water demand of the community that will be using the plant.
 
-The AIDE project was started in order to replace the responsibilities of the Design Team, an AguaClara subteam that was responsible for manually adjusting the designs of AguaClara's water treatment plants to fit each community's water needs. With a software tool, the process of designing a plant becomes much faster and requires less manpower. Also, AIDE can be *distributed to/improved by* anyone in the world with an internet connection, fulfilling AguaClara's devotion to open source technology
+The AIDE project was started with the intention of replacing the Design Team, an AguaClara subteam that was responsible for manually adjusting the designs of AguaClara plants. With a software tool, the process of designing a plant becomes much faster and requires less manpower. Also, AIDE can be *distributed to/improved by* anyone in the world with an internet connection, fulfilling AguaClara's devotion to open source technology.
+
+## How AIDE works
 
 ### Summary of submodules
 
-<!---It would be cool to have photos of each submodule (a picture of the GUI, 3D models, Documentation)  Maybe not in this report but in a future complete document about AIDE (which this could become) --->
 The main AIDE program runs a set of submodules, each of which serves a different purpose. Each submodule can also be used independently from AIDE, albeit with reduced functionality.
 
 1. **Template**: Contains scalable 3D models of water treatment plants and their respective building documentation, maintained by the aide_template team.
@@ -59,9 +62,9 @@ The main AIDE program runs a set of submodules, each of which serves a different
 4. **Draw**: Updates and scales 3D models of water treatment plants, based off of the calculated physical parameters from Design.
 5. **Document**: Updates and scales building documentation of water treatment plants, based off of the calculated physical parameters from Design.
 
-Here is a chart detailing the flow of information throughout each module:
+Here is a chart detailing the flow of information throughout each module. The process begins at GUI (when the user opens the Fusion 360 add-in) and ends with the Design Instance Docs being put into "Other files" on the File System:
 ![](info_flow_modules.jpg)
-<!---It's a little confusing where this process begins and ends from the document.  I would change the arrows from GUI through Document (maybe make them larger and red?) to show that that is the direct flow of AIDE --->
+
 Here is a chart detailing the flow of information relative to each file:
 ![](info_flow_files.jpg)
 
@@ -83,14 +86,14 @@ Here is a chart detailing the flow of information relative to each file:
   - **Special Words YAML**- list of specially translated words in a YAML
   - **Design Instance Website** - website built using Jekyll and uploaded to GitHub Pages, containing all documentation
 
-### How AIDE works
+### Running AIDE
 
 In order to use this custom Fusion 360 addin, you must open Fusion 360 > Scripts & Add-Ins > Add-Ins > Green Plus, then select the file location where you have the AIDE folder downloaded/`git clone`'d. Then, select aide > Run.
 
 > Note that before development on AIDE has finished, you will have to also download and move all of the other AIDE modules into this AIDE folder, but assume for now that they are already in AIDE.
 
 The GUI is then opened up for the user.
-<!---Again pictures would be very helpful.  Consider also making a video of the entire process --->
+
 > In `aide.py`, required dependencies are imported at the top. Then, the `run(context)` function is run, initializing AIDE GUI with `aide_gui.main_run(context, run_design)`. The `run_design` function contains calls to AIDE Design/Draw/Document, and is run by AIDE GUI.
 
 After the user enters their inputs, AIDE Design/Draw/Document are run sequentially, as long as the user has the selected component open in Fusion 360.
@@ -99,27 +102,37 @@ After the user enters their inputs, AIDE Design/Draw/Document are run sequential
 
 > Note that the current iteration of `aide.py` is incomplete and contains only rudimentary placeholders for `aide_design` and `aide_draw`. Once those two submodules are complete, a full implementation will be developed.
 
-### Progress
+## Progress Report 1
 
-#### Module organization
+### Module organization
 
 After much discussion, we came to a conclusion of having our AIDE module be the overall controller, separate from the individual submodules of AIDE. This AIDE module will essentially be in charge of running the whole AIDE program and running GUI, Design, Draw, and Document sequentially.
 
 > We did so using a technique known as the [observer pattern](https://en.wikipedia.org/wiki/Observer_pattern), where, instead of passing objects like integers and strings as function parameters, we're able to pass an entire function as a parameter. Then, this "`onSuccess`" function is called whenever it is needed.
 
+## Progress Report 2
+
 ### Transition to OnShape
 
-Right now the team is in the middle of transitioning from Fusion 360 to OnShape. OnShape is a CADing software system that is also a web browser. OnShape has much of the specific functionality that we were missing in Fusion 360. We hope that after exploring the features of OnShape, we will be able to compare and contrast the two CAD options and make a final decision.
+Right now the team is in the middle of transitioning from Fusion 360 to OnShape. OnShape is a CADing software system that runs completely in the cloud. OnShape has much of the specific functionality that we were missing in Fusion 360. We hope that after exploring the features of OnShape, we will be able to compare and contrast the two CAD options and make a final decision.
 
 ### FeatureScript
 
-Along with learning the different parts and pieces of the CADing process involved with OnShape, we are also in the process of learning Feature Script, the language used in OnShape. By the end of the next two weeks, we hope to create a LFOM feature to simply LFOM creation.
+Along with learning the different parts and pieces of the CADing process involved with Onshape, we are also in the process of learning FeatureScript, the coding language used in Onshape. By the end of the next two weeks, we hope to be able to bring an LFOM through the entire design process within Onshape.
 
-## AIDE TEMPLATE
+### Travis CI and Codecov
+
+We have been implementing continuous integration (via Travis) and code coverage checking (via Codecov) to ensure that our code passes all tests. Travis also has the ability to merge code on our master branches and upload packages to `pip`.
+
+### Team reorganization
+
+Also in talks is the potential reorganization of the of the AIDE team. Since next semester we will not be focusing on GUI and Document, we will need to restructure the team. We will still need a template team, which will be in charge of redoing all of the CADing in OnShape. The size of the team is not confirmed. This past semester, we had a larger subteam, which made communication harder at times. That is also something that will be taken into consideration, when trying to form teams next semester.
+
+# AIDE Template
 
 Template utilizes Fusion 360, a CAD software, to create 3D models of the water treatment plant. Fusion is the ideal software for Template because it allows components to be parameterized with equations and numbers. These parameters come from user-defined values and determine the physical dimensions of the plant's components.
 
-### How AIDE Template works
+## How AIDE Template works
 
 To better understand Template, let's think of a Design template as a burger. Usually when you order a burger, you get a patty, slice of cheese, lettuce, and tomato. The number of each part of the burger can be parametrized as seen below.
 
@@ -137,7 +150,7 @@ Now if you wanted to order a double cheese and double patties, you would input n
 
 The goal for the summer is to finish the 3D models of all the components and test the assemblies to make sure all the components are linked properly. As parameter values change, the geometry of assemblies should change accordingly without interfering with other assemblies. Furthermore, we are trying to find the best naming convention for Template to use in order to have consistent parameter names throughout AIDE and prevent misunderstanding between subteams.
 
-### AIDE Template Organization of components in Fusion 360
+### Organization of components in Fusion 360
 
 Here is a flowchart describing the flow of water through a water treatment plant's components:
 
@@ -224,11 +237,13 @@ Finally, on the right side of the parameter window, you will see the comments se
 
 In summary, this summer, AIDE Template will be creating a standardized parameter naming system and implementing it into the models, starting with the flocculator. Hopefully, Template will have a Variable Naming Wiki page like design does by end of this summer. We will also work on organizing files in Fusion. :)
 
-## TEMPLATE pt 2!
+## Progress Report 2
 
 Since last time, the flocculator has been finished (all parameters have been renamed and some geometry have been fixed). Now, there is a wiki page for Parameter Naming Convention and it also explains naming convention for any pipes and private variables.
 
-However, Template has undergone many changes the past few weeks. We may transition into Onshape, a different 3D modeling program. We are currently working on making the 3D models of pipe fittings to learn more about Onshape and discussing with Ethan if this will be a good switch. The benefits of switching to Onshape are:
+### Transition to Onshape
+
+Template has undergone many changes the past few weeks. We may transition into Onshape, a different 3D modeling program. We are currently working on making the 3D models of pipe fittings to learn more about Onshape and discussing with Ethan if this will be a good switch. The benefits of switching to Onshape are:
 
 - Fusion required a new "Fusion Document" for each unique part. This means that if two different sized pipes were needed, there would need to be two unique fusion documents. This led us to duplicate a ton of data and was partly to blame for the slow load times. OnShape has a configuration table for each document, which allows multiple dimensions of pipes to be stored for one type of pipe. All the pipe dimensions are from McMaster-Carr, so there is no danger of wrong calculations for sizing.
 - OnShape is worked on in the browser, and can also be edited by multiple people at the same time. With Fusion, we would have to continually update the file if it was changed, which was a long process that sometimes crashed.
@@ -242,12 +257,12 @@ For rest of this week, we will be finishing the pipe gallery on Onshape.
 
 For next week, Template will be mainly working on preparing tutorials for Onshape, since it has different features compared to Fusion 360. Hopefully decide how to organize the parameters and files to prevent from the same mistakes as we made in Fusion. We will also discuss team size and organization for Fall.
 
-## AIDE GUI
+# AIDE GUI
 
 When AIDE is run, it also initializes and runs another Fusion 360 add-in, AIDE GUI (Graphical User Interface). This GUI allows the user to input values (such as desired flow rate) that affect the dimensions of the finished water treatment plant.
 <!---add photo of GUI! --->
 
-### How AIDE GUI works
+## How AIDE GUI works
 
 In order to use AIDE GUI, you must first have AIDE installed and set up, with the AIDE GUI folder within the AIDE folder. You then open Fusion 360 > Scripts & Add-Ins > Add-Ins > aide > Run. The palette window then opens on the right.
 <!---Add photo of run process! --->
@@ -282,9 +297,9 @@ If you go to Designs > Load Design, you're then brought to the user inputs page,
 
 > In `template.html`, there is a `<form>` element with a set `id` that contains all of the `<input>` elements defined in `structure.yaml` under the `params` keys. After user values are entered and "Collect" is clicked, a slightly different `sendInfoToFusion` call is made where these `<input>` elements' values are collected with `formToDict()`. These collected values are then sent to `MyHTMLEventHandler.notify` and written to `params.yaml`.
 
-### Progress
+## Progress
 
-#### File reorganization
+### File reorganization
 
 We started out by restructuring the files in the top-most directory to contain the following:
 
@@ -298,20 +313,16 @@ We started out by restructuring the files in the top-most directory to contain t
 3. `dependencies/` contains the Python packages for displaying the GUI and processing user inputs:
     - `jinja2`, `markupsafe`, `urllib3`, `yaml`
 
-#### Added functionality
+### Added functionality
 
 We now have the ability to output a YAML (`params.yaml` in the top level directory) containing the user's inputs for a given design. This is the YAML that will be passed on to the design team to do the calculations.
 > To do this, we added the `formToDict` function in `base.html`'s JavaScript that collects inputs within a HTML `<form>` object in `template.html`.
 
-### Progress 2
-
-After finishing the LFOM, much of the work has been done with Aide Gui. We have been testing the code using Travis CI, but always get errors that are outside of our control and have to do with other parts of AIDE, such as AIDE draw and AIDE design.
-
-## AIDE Design
+# AIDE Design
 
 Design runs hydraulic calculations based off of inputs from GUI, creating exact physical dimensions for each component.
 
-### How AIDE Design works
+## How AIDE Design works
 
 Within the `aide_design` package, there are three main folders of code:
 
@@ -323,11 +334,13 @@ In the current iteration of AIDE, we are first testing the creation of a LFOM de
 
 > Right now, we are working as if `aide_design` was completed and running. In the run function in aide, we have written in a function that is replacing the design functions for now. In `lfom.yaml`, for the time being, we are only calculating one small thing, the spacing. After the YAML is changed with the new calculation, this YAML is then passed to AIDE Draw.
 
-### Progress
+## Progress Report 2
 
-Design
+We have been going through the current code base of Design and fixing any failing tests. For the most part, the tests were failing because of a version issue with `numpy`, which was easily fixed. However, there are still many functions that haven't been written, which will need to be get done if we are to move on to designing components other than the LFOM.
 
-## AIDE Draw
+We have also been discussing the relation between Design and Render. Render is a helper module that runs the functions within Design, after being given the user inputs from GUI. Before Design can be fully incorporated with Render, we need to make Design's variable names more intuitive and reorganize some functions.
+
+# AIDE Draw
 
 After the YAML is passed from Design, Draw uses the final parameters and update a parameterized Fusion 360 design.
 
@@ -339,15 +352,11 @@ This is done by taking a YAML template file which specifies parameters for the F
 
 The first thing that was done in the summer with aide_draw was get rid of any files and folders that we believed were not necessary. We still have yet to do a deep dive into the code and refactor any necessary functions, as well as change up the naming conventions to make it easier to develop on.
 
-## Progress 2
-
-We have also been testing AIDE draw on Travis CI to make sure that it passes all tests. So far it has been failing. Ethan has been
-
-## AIDE Document
+# AIDE Document
 
 Using the specified physical parameters and documentation templates, Document generates completed build documentation for the hydraulic design of a water treatment plant.
 
-### How AIDE Document works
+## How AIDE Document works
 
 `aide_document` is distributed via a PIP package, which can be installed on your computer by running `pip install aide_document`. There are a collection of functions in submodules that can then be accessed by a call of `module.function`:
 
@@ -357,10 +366,5 @@ Using the specified physical parameters and documentation templates, Document ge
     - `md_to_pdf()`: Converts a specified Markdown file to a PDF file.
 3. `translate`: Translates a Markdown file to a different language using the Google Translate API.
     - `translate()`: Translates Markdown between two different languages. Has the option of specifying special words to ignore the Google Translate translation and use your own translation.
-
-<!---Add a progress section, even if it just says that you won't be working on Document because it's done --->
-## Team reorganization
-
-Also in talks is the potential reorganization of the of the AIDE team. Since next semester we will not be focusing on GUI and Document, we will need to restructure the team. We will still need a template team, which will be in charge of redoing all of the CADing in OnShape. The size of the team is not confirmed. This past semester, we had a larger subteam, which made communication harder at times. That is also something that will be taken into consideration, when trying to form teams next semester.
 
 Thanks for reading! :D
