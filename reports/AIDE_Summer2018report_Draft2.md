@@ -1,7 +1,5 @@
 # AIDE - Summer Research Report #1 - 2nd Draft
 
-<<<<<<< HEAD
-<Anishka Singh as2643, Emma Sung, Oliver Leung, Gabby Peralta-->
 =======
 - *Date: July 27th, 2018*
 - *Written by: Anishka Singh (as2643), Emma Sung (hs699), Gabby Peralta (gp275), Oliver Leung (oal22).*
@@ -175,16 +173,16 @@ Finally on the right side of the parameter window, you will see the comments sec
 
 In summary, this summer, AIDE Template will be creating a standardized parameter naming system and implementing it into the models, starting with the flocculator. Hopefully, Template will have a Variable Naming Wiki page like design does by end of this summer. We will also work on organizing files in Fusion. :)
 
-## TEMPLATE pt 2! 
+## TEMPLATE pt 2!
 Since last time, the flocculator has been finished (all parameters have been renamed and some geometry have been fixed). Now, there is a wiki page for Parameter Naming Convention and it also explains naming convention for any pipes and private variables.
 
 However, Template has undergone many changes the past few weeks. We may transition into Onshape, a different 3D modeling program. We are currently working on making the 3D models of pipe fittings to learn more about Onshape and discussing with Ethan if this will be a good switch. The benefits of switching to Onshape are:
 
-- Fusion required a new "Fusion Document" for each unique part. This means that if two different sized pipes were needed, there would need to be two unique fusion documents. This led us to duplicate a ton of data and was partly to blame for the slow load times. OnShape has a configuration table for each document, which allows multiple dimensions of pipes to be stored for one type of pipe. All the pipe dimensions are from McMaster-Carr, so there is no danger of wrong calculations for sizing
-- OnShape is worked on in the browser, and can also be edited by multiple people at the same time. With Fusion, we would have to continually update the file if it was changed, which was a long process that sometimes crashed
-- Fusion makes it hard for students to develop new feature definitions, and so we needed to come up with the LFOM workaround by limiting our choices to a 4 or 8 row LFOM. OnShape works with arrays, which fixes this problem
-- Fusion is slow. All processing is done client side, and that can result in very slow building times. Processing for OnShape is done mostly on the servers, which prevents crashes, but it is still undetermined if it will fix the long building times for large files
-- Autodesk runs Fusion, but also Revit, Inventor, AutoCAD, and many others. OnShape just focuses on OnShape, which has allowed for many updates, and accessibility to speak to OnShape representatives very quickly
+- Fusion required a new "Fusion Document" for each unique part. This means that if two different sized pipes were needed, there would need to be two unique fusion documents. This led us to duplicate a ton of data and was partly to blame for the slow load times. OnShape has a configuration table for each document, which allows multiple dimensions of pipes to be stored for one type of pipe. All the pipe dimensions are from McMaster-Carr, so there is no danger of wrong calculations for sizing.
+- OnShape is worked on in the browser, and can also be edited by multiple people at the same time. With Fusion, we would have to continually update the file if it was changed, which was a long process that sometimes crashed.
+- Fusion makes it hard for students to develop new feature definitions, and so we needed to come up with the LFOM workaround by limiting our choices to a 4 or 8 row LFOM. OnShape works with arrays, which fixes this problem.
+- Fusion is slow. All processing is done client side, and that can result in very slow building times. Processing for OnShape is done mostly on the servers, which prevents crashes, but it is still undetermined if it will fix the long building times for large files.
+- Autodesk runs Fusion, but also Revit, Inventor, AutoCAD, and many others. OnShape just focuses on OnShape, which has allowed for many updates, and accessibility to speak to OnShape representatives very quickly.
 
 
 
