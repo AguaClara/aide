@@ -1,9 +1,7 @@
 # AIDE - Summer Research Report #1 - 2nd Draft
 
-=======
 - *Date: July 27th, 2018*
 - *Written by: Anishka Singh (as2643), Emma Sung (hs699), Gabby Peralta (gp275), Oliver Leung (oal22).*
->>>>>>> e2d07e5a9ea575f23132ac5265946a78dc90fc11
 
 In this report, quoted lines give a more detailed description of how the components work in the background.
 > Skip over them if you only want to read a high-level explanation of the modules.
