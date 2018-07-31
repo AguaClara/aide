@@ -128,6 +128,8 @@ We have been implementing continuous integration (via Travis) and code coverage 
 
 Also in talks is the potential reorganization of the of the AIDE team. Since next semester we will not be focusing on GUI and Document, we will need to restructure the team. We will still need a template team, which will be in charge of redoing all of the CADing in OnShape. The size of the team is not confirmed. This past semester, we had a larger subteam, which made communication harder at times. That is also something that will be taken into consideration, when trying to form teams next semester.
 
+**Ian's Comment:**  After the meeting on Thursday this section should be updated with our decision.
+
 # AIDE Template
 
 Template utilizes Fusion 360, a CAD software, to create 3D models of the water treatment plant. Fusion is the ideal software for Template because it allows components to be parameterized with equations and numbers. These parameters come from user-defined values and determine the physical dimensions of the plant's components.
