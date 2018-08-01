@@ -46,9 +46,13 @@ In this report, quoted lines give a more detailed description of how the compone
 
 # AIDE: AguaClara Infrastructure Design Engine
 
+**Ian's Comments:** I would update the description of AIDE to something more like "A design tool that interfaces with CAD software to produce hydraulic designs of water treatment plants"
+
 AIDE is a Fusion 360 add-in that produces the hydraulic design and building documentation for a water treatment plant, depending on the water demand of the community that will be using the plant.
 
 The AIDE project was started with the intention of replacing the Design Team, an AguaClara subteam that was responsible for manually adjusting the designs of AguaClara plants. With a software tool, the process of designing a plant becomes much faster and requires less manpower. Also, AIDE can be *distributed to/improved by* anyone in the world with an internet connection, fulfilling AguaClara's devotion to open source technology.
+
+**Ian's Comments:** Give a brief description of previous AIDE teams and the work they did.
 
 ## How AIDE works
 
@@ -123,6 +127,8 @@ Along with learning the different parts and pieces of the CADing process involve
 ### Travis CI and Codecov
 
 We have been implementing continuous integration (via Travis) and code coverage checking (via Codecov) to ensure that our code passes all tests. Travis also has the ability to merge code on our master branches and upload packages to `pip`.
+
+**Ian's Comments:** It would be helpful to include a link here to Ethan's "best coding practices" discussion, which should become a tutorial if it has not been already
 
 ### Team reorganization
 
@@ -258,6 +264,8 @@ While Onshape has many benefits, the downside is that Template will have to make
 For rest of this week, we will be finishing the pipe gallery on Onshape.
 
 For next week, Template will be mainly working on preparing tutorials for Onshape, since it has different features compared to Fusion 360. Hopefully decide how to organize the parameters and files to prevent from the same mistakes as we made in Fusion. We will also discuss team size and organization for Fall.
+
+**Ian's Comments:** Include a link to the tutorials!
 
 # AIDE GUI
 
