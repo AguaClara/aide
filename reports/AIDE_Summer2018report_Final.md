@@ -46,13 +46,9 @@ In this report, quoted lines give a more detailed description of how the compone
 
 # AIDE: AguaClara Infrastructure Design Engine
 
-**Ian's Comments:** I would update the description of AIDE to something more like "A design tool that interfaces with CAD software to produce hydraulic designs of water treatment plants"
-
-AIDE is a Fusion 360 add-in that produces the hydraulic design and building documentation for a water treatment plant, depending on the water demand of the community that will be using the plant.
+AIDE is a software tool that produces hydraulic designs of water treatment plants. It accomplishes this by interfacing with CAD software.
 
 The AIDE project was started with the intention of replacing the Design Team, an AguaClara subteam that was responsible for manually adjusting the designs of AguaClara plants. With a software tool, the process of designing a plant becomes much faster and requires less manpower. Also, AIDE can be *distributed to/improved by* anyone in the world with an internet connection, fulfilling AguaClara's devotion to open source technology.
-
-**Ian's Comments:** Give a brief description of previous AIDE teams and the work they did.
 
 ## How AIDE works
 
@@ -128,13 +124,25 @@ Along with learning the different parts and pieces of the CADing process involve
 
 We have been implementing continuous integration (via Travis) and code coverage checking (via Codecov) to ensure that our code passes all tests. Travis also has the ability to merge code on our master branches and upload packages to `pip`.
 
-**Ian's Comments:** It would be helpful to include a link here to Ethan's "best coding practices" discussion, which should become a tutorial if it has not been already
+https://github.com/orgs/AguaClara/teams/aide_integration
 
+### Better Coding Practices
+
+Since AguaClara AIDE is a student team with a high turnover rate, it's important that our work is easily accessible to new members. This starts from having a code base that is well written and organized.
+
+In [this discussion](https://github.com/orgs/AguaClara/teams/aide_integration/discussions/1), Ethan talked about various methods of ensuring that our code aligns with those goals:
+
+1. **Versioning**: We will use a variety of services to ensure that, when our code is acceptable, it is automatically uploaded to Python packages that can be installed via `pip`:
+    - *Codecov*: to ensure that all of our code is being properly tested
+    - *Travis CI*: to ensure that all of our tests pass
+    - *PyPI*: to distribute our code to users
+2. **Code Reviews**: We will regularly review our code to ensure that it follows the [PEP 8 Style Guide](https://www.python.org/dev/peps/pep-0008/) and is easy to read.
+3. **Python Environments**: Because our software will depend on other packages, which will have different versions. Using environments via `pipenv` will ensure that these versions stay the same, no matter who is using our software.
+4. **Writing tests**: Tests are a great way to ensure that *what* the code does will not change from version to version.
+.
 ### Team reorganization
 
-Also in talks is the potential reorganization of the of the AIDE team. Since next semester we will not be focusing on GUI and Document, we will need to restructure the team. We will still need a template team, which will be in charge of redoing all of the CADing in OnShape. The size of the team is not confirmed. This past semester, we had a larger subteam, which made communication harder at times. That is also something that will be taken into consideration, when trying to form teams next semester.
-
-**Ian's Comment:**  After the meeting on Thursday this section should be updated with our decision.
+We have also decided to restructure the team for next semester. Since we will not be focusing on GUI and Document in the fall, we have decided to restructure the team for next semester. We will still have a template team, which will be in charge of redoing all of the CADing in OnShape and spend time learning everything. The size of the template team will also be much smaller than it was last semester. This downsizing will allow template to communicate better and be more cohesive. A 1L/s plant also needs to be CADed, so members of the template team will work on it at the beginning of the semester. Because of this, AIDE template will be split into two teams, Template 1 and Template 2. Along with template, we are planning to have a AIDE code team and an AIDE design team working on more of the coding parts and with featurescipt. We will also have one person working to maintain aguaclara_research.
 
 # AIDE Template
 
@@ -261,11 +269,10 @@ Template has undergone many changes the past few weeks. We may transition into O
 
 While Onshape has many benefits, the downside is that Template will have to make the treatment plant again from scratch.
 
-For rest of this week, we will be finishing the pipe gallery on Onshape.
+The team has spent time completing tutorials, and found the ones that are appropriate for the Fall team. [Here](https://github.com/AguaClara/aide_template/blob/YAML/Fall%202018%20Planning) is a link to the Fall 2018 Team planning document:
 
-For next week, Template will be mainly working on preparing tutorials for Onshape, since it has different features compared to Fusion 360. Hopefully decide how to organize the parameters and files to prevent from the same mistakes as we made in Fusion. We will also discuss team size and organization for Fall.
+[Here](https://learn.onshape.com/learning-paths/onshape-fundamentals-cad) is a link to all of the tutorials.
 
-**Ian's Comments:** Include a link to the tutorials!
 
 # AIDE GUI
 
