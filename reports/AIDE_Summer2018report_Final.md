@@ -13,6 +13,7 @@
     - [Transition to OnShape](#transition-to-onshape)
     - [FeatureScript](#featurescript)
     - [Travis CI and Codecov](#travis-ci-and-codecov)
+    - [Better Coding Practices](#better-coding-practices)
 - [AIDE Template](#aide-template)
   - [How AIDE Template works](#how-aide-template-works)
     - [Organization of components in Fusion 360](#organization-of-components-in-fusion-360)
@@ -30,10 +31,8 @@
 - [AIDE Draw](#aide-draw)
   - [How AIDE Draw works](#how-aide-draw-works)
   - [Progress](#progress-1)
-  - [Progress 2](#progress-2)
 - [AIDE Document](#aide-document)
   - [How AIDE Document works](#how-aide-document-works)
-  - [Team reorganization](#team-reorganization)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -142,7 +141,14 @@ In [this discussion](https://github.com/orgs/AguaClara/teams/aide_integration/di
 .
 ### Team reorganization
 
-We have also decided to restructure the team for next semester. Since we will not be focusing on GUI and Document in the fall, we have decided to restructure the team for next semester. We will still have a template team, which will be in charge of redoing all of the CADing in OnShape and spend time learning everything. The size of the template team will also be much smaller than it was last semester. This downsizing will allow template to communicate better and be more cohesive. A 1L/s plant also needs to be CADed, so members of the template team will work on it at the beginning of the semester. Because of this, AIDE template will be split into two teams, Template 1 and Template 2. Along with template, we are planning to have a AIDE code team and an AIDE design team working on more of the coding parts and with featurescipt. We will also have one person working to maintain aguaclara_research.
+Following the subteam planning meeting, we have decided to downsize the number of subteams within AIDE. Doing so will allow for better communication across different subteams, which is critical for building a cohesive software tool. Furthermore, it will ease the transition from Fusion 360 to Onshape.
+
+We will have the following subteams:
+
+1. **Template Plant**: to focus on modelling the 20-60L/s water treatment plant within Onshape.
+2. **Template 1L/s**: to focus on modelling the 1L/s plant within Onshape.
+3. **Design**: to complete the `aide_design` Python package for calculating the plants' physical dimensions and hydraulic parameters.
+4. **Code**: to write an Onshape extension within FeatureScript that will modify the 3D model of the 20-60L/s plant.
 
 # AIDE Template
 
