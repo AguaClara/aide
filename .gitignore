@@ -1,11 +1,4 @@
-# AIDE submodules
-aide_gui
-aide_render
-aide_design
-aide_draw
-
-# Data folder
-data
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
